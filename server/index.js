@@ -29,7 +29,7 @@ app.get("/getApplicants", (req, res) => {
     })
 })
 
-//TODO: test/fix endpoints....find no longer accepts a callback error
+//TODO: test/fix endpoints...model.find no longer accepts a callback error
 
 app.post("/createApplicants", async (req, res) => {
     const applicant = req.body;
