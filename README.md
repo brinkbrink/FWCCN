@@ -21,7 +21,7 @@ The website will be used to provide information about the organization, its serv
     * `git clone https://github.com/brinkbrink/FWCCN.git`
 * Create a branch
 * Install the dependencies
-    * `npm install`
+    * `npm install express mongoose cors nodemon`
 * Run the application
     * `npm start`
 * Open the application in your browser

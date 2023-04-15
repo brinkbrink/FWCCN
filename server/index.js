@@ -9,7 +9,7 @@ app.use(cors());
 // Connect to MongoDB
 const uri = `mongodb+srv://tinpham5614:Washington5614@cluster0.redefo6.mongodb.net/FWCCN?retryWrites=true&w=majority`;
 mongoose.connect(uri);
-
+//TODO: change code here
 app.get("/getUsers", (req, res) => {
     UserModel.find({})
         .then((data) => {
@@ -27,9 +27,7 @@ app.post("/createUser", async (req, res) => {
     );
 });
 
-
-//MongooseError: Model.find() no longer accepts a callback
-
+// Do not change code below
 app.listen(3001, () => {
     console.log('Server is running on 3001');
 });
