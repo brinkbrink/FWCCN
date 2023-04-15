@@ -20,13 +20,28 @@ The website will be used to provide information about the organization, its serv
 * Clone the repository
     * `git clone https://github.com/brinkbrink/FWCCN.git`
 * Create a branch
-* Install the dependencies
-    * `npm install`
+    * `git branch <yourname>`
+* Switch to your branch
+    * `git checkout <yourname>`
+* Install the packages
+    * `npm init -y`
+    * `npm install express mongoose cors nodemon dotenv`
 * Run the application
-    * `npm start`
+    * Go to the server folder
+        * `npm start` 
+    * Go to the client folder
+        * `npm start`
 * Open the application in your browser
 * Make changes
-
+* Check repo status
+    * `git status`
+* Add files
+    * `git add .`
+* Commit
+    * `git commit -m "your message here" `
+* Push
+    * `git push -u origin <your branch name>`
+* Go to the github repo and make a pull request
 # Project Team:
 
 * [Brink](
