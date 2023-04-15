@@ -2,12 +2,19 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const UserModel = require('./models/users');
+const dotenv = require('dotenv');
+dotenv.config();
+
+// Middleware
 app.use(express.json());
 const cors = require('cors');
 app.use(cors());
 
 // Connect to MongoDB
-const uri = `mongodb+srv://tinpham5614:Washington5614@cluster0.redefo6.mongodb.net/FWCCN?retryWrites=true&w=majority`;
+const db_username = process.env.MONGO_DB_USERNAME;
+const db_password = process.env.MONGO_DB_PASSWORD;
+const db_url = process.env.MONGO_DB_URL;
+const uri = `mongodb+srv://${db_username}:${db_password}@${db_url}/FWCCN?retryWrites=true&w=majority`;
 mongoose.connect(uri);
 //TODO: change code here
 app.get("/getUsers", (req, res) => {
