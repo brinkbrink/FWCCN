@@ -1,8 +1,12 @@
-const express = require("express");
+const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const ApplicantModel = require('./models/Applicants')
+const ApplicantModel = require('./models/Applicants');
+const cors = require('cors');
+
+app.use(express.json());
+app.use(cors());
 
 dotenv.config()
 // Replace the uri string with your connection string.
@@ -25,7 +29,7 @@ app.get("/getApplicants", (req, res) => {
     })
 })
 
-//TODO: test/fix endpoints
+//TODO: test/fix endpoints....find no longer accepts a callback error
 
 app.post("/createApplicants", async (req, res) => {
     const applicant = req.body;
