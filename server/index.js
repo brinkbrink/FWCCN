@@ -1,40 +1,58 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const UserModel = require('./models/users');
-const dotenv = require('dotenv');
-dotenv.config();
 
-// Middleware
-app.use(express.json());
+const dotenv = require('dotenv');
+const ApplicantModel = require('./models/Applicants');
 const cors = require('cors');
+
+app.use(express.json());
 app.use(cors());
 
-// Connect to MongoDB
+dotenv.config()
+// Replace the uri string with your connection string.
 const db_username = process.env.MONGO_DB_USERNAME;
 const db_password = process.env.MONGO_DB_PASSWORD;
 const db_url = process.env.MONGO_DB_URL;
-const uri = `mongodb+srv://${db_username}:${db_password}@${db_url}/FWCCN?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${db_username}:${db_password}@${db_url}?retryWrites=true&w=majority`;
+
 mongoose.connect(uri);
-//TODO: change code here
-app.get("/getUsers", (req, res) => {
-    UserModel.find({})
-        .then((data) => {
-            res.json(data);
+
+
+//can also use routes for the following
+app.get("/getApplicants", (req, res) => {
+    ApplicantModel.find({}, (err, result) => {
+        if (err) {
+            res.json(err);
+        } else {
+            res.json(result);
         }
-    );
+    })
+})
+
+//TODO: test/fix endpoints...model.find no longer accepts a callback error
+
+app.post("/createApplicants", async (req, res) => {
+    const applicant = req.body;
+    const newApplicant = new ApplicantModel(applicant);
+    await newApplicant.save();
+})
+
+
+app.get("/getApplicants", async (req,res) => {
+    try {
+        await client.connect();
+        const result = await ApplicantModel.find({});
+        res.type('json');
+        res.status(200);
+        res.json(result);
+    } catch (error) {
+      console.log(error)  
+    } finally {
+        await client.close();
+    }
 });
 
-app.post("/createUser", async (req, res) => {
-    const newUser = new UserModel(req.body);
-    await newUser.save()
-        .then((data) => {
-            res.json(data);
-        }
-    );
-});
-
-// Do not change code below
 app.listen(3001, () => {
-    console.log('Server is running on 3001');
+    console.log("server is running")
 });

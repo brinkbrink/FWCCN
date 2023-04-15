@@ -11,7 +11,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+<<<<<<< HEAD
     "atlas": "^1.0.0-alpha.0",
+=======
+>>>>>>> origin/main
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
