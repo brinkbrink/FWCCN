@@ -1,19 +1,35 @@
-const express = require("express");
+const express = require('express');
 const app = express();
-const cors = require("cors");
-require("dotenv").config({ path: "./config.env" });
-const port = process.env.PORT || 5000;
-app.use(cors());
+const mongoose = require('mongoose');
+const UserModel = require('./models/users');
 app.use(express.json());
-app.use(require("./routes/user.js"));
-// get driver connection
-const dbo = require("./db/conn.js");
+const cors = require('cors');
+app.use(cors());
 
-app.listen(port, () => {
-    // perform a database connection when server starts
-    dbo.connectToServer(function (err) {
-        if (err) console.error(err);
+// Connect to MongoDB
+const uri = `mongodb+srv://tinpham5614:Washington5614@cluster0.redefo6.mongodb.net/FWCCN?retryWrites=true&w=majority`;
+mongoose.connect(uri);
 
-    });
-    console.log(`Server is running on port: ${port}`);
+app.get("/getUsers", (req, res) => {
+    UserModel.find({})
+        .then((data) => {
+            res.json(data);
+        }
+    );
+});
+
+app.post("/createUser", async (req, res) => {
+    const newUser = new UserModel(req.body);
+    await newUser.save()
+        .then((data) => {
+            res.json(data);
+        }
+    );
+});
+
+
+//MongooseError: Model.find() no longer accepts a callback
+
+app.listen(3001, () => {
+    console.log('Server is running on 3001');
 });
