@@ -25,7 +25,7 @@ The website will be used to provide information about the organization, its serv
     * `git checkout <yourname>`
 * Install the packages
     * `npm init -y`
-    * `npm install express mongoose cors nodemon`
+    * `npm install express mongoose cors nodemon dotenv`
 * Run the application
     * Go to the server folder
         * `npm start` 
