@@ -52,6 +52,11 @@ app.get("/getApplicants", async (req,res) => {
     }
 });
 
+app.get("/", async (req,res) => {
+    res.send("hello")
+});
+
 app.listen(3001, () => {
     console.log("server is running")
+
 });
