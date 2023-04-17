@@ -13,6 +13,8 @@ const ApplicantSchema = new mongoose.Schema({
         type: String, 
         required: false,
     },
+}, {
+	timestamps: true,
 });
 
 const ApplicantModel = mongoose.model("applicants", ApplicantSchema)

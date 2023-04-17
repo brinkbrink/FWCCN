@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 const ApplicantModel = require('./models/Applicants');
 const cors = require('cors');
 
+const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(cors());
 
@@ -16,7 +17,13 @@ const db_url = process.env.MONGO_DB_URL;
 const uri = `mongodb+srv://${db_username}:${db_password}@${db_url}?retryWrites=true&w=majority`;
 
 mongoose.connect(uri);
+const connection = mongoose.connection;
+connection.once ('open',() => {
+    console.log('Succesfully connected to the database!');
+})
 
+const applicantRouter = require('./routes/applicants'); 
+app.use('/applicants', applicantRouter);//using route "applicants" from routes folder
 
 //can also use routes for the following
 app.get("/getApplicants", (req, res) => {
@@ -40,6 +47,7 @@ app.post("/createApplicants", async (req, res) => {
 
 app.get("/getApplicants", async (req,res) => {
     try {
+        console.log(req.body);
         await client.connect();
         const result = await ApplicantModel.find({});
         res.type('json');
@@ -54,9 +62,9 @@ app.get("/getApplicants", async (req,res) => {
 
 app.get("/", async (req,res) => {
     res.send("hello")
-});
+}); 
 
-app.listen(3001, () => {
-    console.log("server is running")
+app.listen(port, () => {
+    console.log(`server is running on port: ${port}`)
 
 });
