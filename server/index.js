@@ -17,18 +17,6 @@ const uri = `mongodb+srv://${db_username}:${db_password}@${db_url}?retryWrites=t
 
 mongoose.connect(uri);
 
-
-//can also use routes for the following
-app.get("/getApplicants", (req, res) => {
-    ApplicantModel.find({}, (err, result) => {
-        if (err) {
-            res.json(err);
-        } else {
-            res.json(result);
-        }
-    })
-})
-
 //TODO: test/fix endpoints...model.find no longer accepts a callback error
 
 app.post("/createApplicants", async (req, res) => {
@@ -37,18 +25,15 @@ app.post("/createApplicants", async (req, res) => {
     await newApplicant.save();
 })
 
-
+// fixed endpoint
 app.get("/getApplicants", async (req,res) => {
     try {
-        await client.connect();
         const result = await ApplicantModel.find({});
         res.type('json');
         res.status(200);
         res.json(result);
     } catch (error) {
-      console.log(error)  
-    } finally {
-        await client.close();
+        console.log(error)  
     }
 });
 
