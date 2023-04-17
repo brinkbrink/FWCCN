@@ -6,7 +6,7 @@ The website will be used to provide information about the organization, its serv
 
 # Features:
 
-* Something
+* Form something something best practices
 * Something else
 * Something else again
 * Something else again again
