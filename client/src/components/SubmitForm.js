@@ -1,48 +1,63 @@
-// this is a form that will be used to submit a new applicant to the database
-// make the button type="submit" so that it will submit the form
-// it will be rendered in the App.js file
-import React, { useState } from 'react';
+// this is a submit form
+// fetch an endpoint and insert data into the database
+import React, { useState } from "react";
 
 function SubmitForm() {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
 
-    
-    const handleSubmit = (e) => {
-        e.preventDefault(); 
-        const applicant = { firstName, lastName };
-        console.log(applicant);
-    }
-
-    //insert fetch request here to send the applicant to the database
-    fetch('http://localhost:3001/createApplicants', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(
-            { firstName: firstName, lastName: lastName }
-        )
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    alert(`Submitting Name ${firstName} ${lastName}`);
+    fetch("http://localhost:3001/createApplicants", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstName: firstName,
+        lastName: lastName,
+      }),
     })
-    .then(res => res.json())
-    .then(data => console.log(data))
-    .catch(err => console.log(err))
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  };
 
-    
-    return (
-        <div className="submit-form">
-            <form onSubmit={handleSubmit}>
-                <label>First Name</label>
-                <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-                <label>Last Name</label>
-                <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+  return (
+    <div className="form">
+      <form className="submit-form" onSubmit={handleSubmit}>
+        <div>
+          <label className="submit-label">
+            First Name:
+            <input
+              className="submit-input"
+              type="text"
+              placeholder="Enter first name here..."
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              required={true}
+            />
+          </label>
 
-                <button type="submit">Submit</button>
-            </form>
+          <label className="submit-label">
+            Last Name:
+            <input
+              className="submit-input"
+              type="text"
+              placeholder="Enter last name here..."
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              required={true}
+            />
+          </label>
 
+          <button className="submit-button">Submit</button>
         </div>
-    )
+      </form>
+    </div>
+  );
 }
 
 export default SubmitForm;
-
