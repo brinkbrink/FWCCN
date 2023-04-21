@@ -6,10 +6,11 @@ The website will be used to provide information about the organization, its serv
 
 # Features:
 
-* Form something something best practices
-* Something else
-* Something else again
-* Something else again again
+* Efficient form for applicants and interviewers to utilize
+* Form with error and rule checking
+* Form is downloadable as a PDF
+* Easy maintenance and flexibility if changes are needed in the future
+* Data schema that lends itself to a quarterly report
 
 # Technologies Used:
 
