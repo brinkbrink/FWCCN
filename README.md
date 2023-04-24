@@ -1,8 +1,7 @@
 # Project Name: Federal Way Community Caregiving Network (FWCCN)
 
 # Project Description:
-This is a project to create a website for the Federal Way Community Caregiving Network (FWCCN). The FWCCN is a non-profit organization that provides support and resources to caregivers in the Federal Way area.
-The website will be used to provide information about the organization, its services, and its events. It will also be used to provide information about caregiving in general, and to provide resources for caregivers.
+This is a project to create a virtual intake form for the Federal Way Community Caregiving Network (FWCCN). The FWCCN is a non-profit organization that provides support and resources to caregivers in the Federal Way area.
 
 # Features:
 
