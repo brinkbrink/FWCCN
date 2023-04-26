@@ -1,5 +1,6 @@
 import './App.css';
 import SubmitForm from './components/SubmitForm';
+import "./SubmitForm.css"
 
 function App() {
     return (

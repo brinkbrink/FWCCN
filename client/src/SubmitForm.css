@@ -1,0 +1,92 @@
+.form {
+    max-width: 900px;
+    padding: 10px;
+    margin: 0 auto;
+    background-color: #f5f5f5;
+    border: 3px solid #ccc;
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+  }  
+  h2, h3 {
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+  
+  .submit-form label {
+    padding: 5px;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+/* display the box as 1 under line */
+  .submit-form input, .submit-form select{
+    margin-bottom: 20px;
+    font-size: 14px;
+    padding: 5px 10px 3px 0px;
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    background-color: #f5f5f5;
+  }
+  
+  .submit-form input:focus, .submit-form select:focus {
+    border-bottom: 2px solid #4CAF50;
+  }
+
+  .submit-form input[type="text"] {
+    width: 140px;
+  }
+  .submit-form input[type="date"] {
+    appearance: none;
+    -webkit-appearance: none;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .submit-form input[type="number"] {
+    width: 80px;
+  }
+  
+  .submit-form select {
+    height: 40px;
+  }
+  
+  .submit-form button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
+  .submit-form button:hover {
+    background-color: #3e8e41;
+    font-size: large;
+  }
+  
+  .submit-form button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .submit-form .error {
+    color: red;
+    margin-top: 5px;
+    font-size: 14px;
+  }
+
+  /* make 2 columns in demographics section */
+  .demographics-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .demographics-column {
+    flex: 50%;
+  }
+  .demographics-column label {
+    display: inline-block;
+    width: 60%;
+  }
