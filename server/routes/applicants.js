@@ -26,4 +26,30 @@ router.route('/add').post((req,res)=>{ //second route, handles incoming http pos
 		.catch(err => res.status(400).josn('Error: ' + err)); //or else return error    
 });
 
+router.route('/:id').get((req,res) => { //get request from database
+        ApplicantModel.findById(req.params.id) //get from the url
+        .then(applicants => res.json(applicants))
+        .catch(err => res.status(400).json('Error:' + err));
+});
+
+router.route('/:id').delete((req,res) => {
+    ApplicantModel.findByIdAndDelete(req.params.id) //get id from the url
+    .then(() => res.json('Applicant deleted. '))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.route('/update/:id').post((req,res) => { //post req
+    ApplicantModel.findById(req.params.id)
+    .then(applicants => {
+        applicants.lastName = req.body.lastName;
+        applicants.middleInitial = req.body.middleInitial;
+        applicants.firstName = req.body.firstName;
+
+        applicants.save()
+            .then(() => res.json('Applicant updated!'))
+            .catch(err => res.status(400).json('Error: ' + err));
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+})
+
 module.exports = router;
