@@ -11,7 +11,7 @@ const ApplicantSchema = new mongoose.Schema({
     },
     middleInitial: {
         type: String, 
-        required: false,
+        required: true,
     },
 }, {
 	timestamps: true,
