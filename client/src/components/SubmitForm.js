@@ -41,7 +41,7 @@ function SubmitForm() {
     girlNumber: "",
     girlAge: "",
     childRel: "",
-    schoolDist: "",
+    schoolDistrict: "",
     schoolName: "",
   });
   const [adults, setAdults] = useState({
@@ -94,15 +94,15 @@ function SubmitForm() {
     numberMembers: "",
   });
   const [demographics, setDemographics] = useState({
-    numAmericanIndian: "",
-    numAsian: "",
-    numBlack: "",
-    numLatinx: "",
-    numNative: "",
-    numWhite: "",
-    numbOther: "",
-    numMulti: "",
-    numUnknown: "",
+    numAmericanIndian: 0,
+    numAsian: 0,
+    numBlack: 0,
+    numLatinx: 0,
+    numNative: 0,
+    numWhite: 0,
+    numOther: 0,
+    numMulti: 0,
+    numUnknown: 0,
   });
 
   const handleSubmit = (event) => {
@@ -158,7 +158,7 @@ function SubmitForm() {
           girlNumber: children.girlNumber,
           girlAge: children.girlAge,
           childRel: children.childRel,
-          schoolDist: children.schoolDist,
+          schoolDistrict: children.schoolDistrict,
           schoolName: children.schoolName,
         },
         adults: {
@@ -257,8 +257,7 @@ function SubmitForm() {
             onChange={(e) =>
               setApplicantName({ ...applicantName, lastName: e.target.value })
             }
-            // TODO: Add required={true}
-            // required={true}
+            required={true}
           />
 
           <label className="submit-label">Middle Name:</label>
@@ -279,7 +278,7 @@ function SubmitForm() {
             onChange={(e) =>
               setApplicantName({ ...applicantName, firstName: e.target.value })
             }
-            // required={true}
+            required={true}
           />
         </div>
         <div>
@@ -297,10 +296,10 @@ function SubmitForm() {
           <label className="submit-label">Age:</label>
           <input
             className="submit-input"
-            type="text"
+            type="number"
             value={age}
             onChange={(e) => setAge(e.target.value)}
-            // required={true}
+            required={true}
             min={18}
           />
         </div>
@@ -311,7 +310,7 @@ function SubmitForm() {
             type="text"
             value={address.street}
             onChange={(e) => setAddress({ ...address, street: e.target.value })}
-            // required={true}
+            required={true}
           />
 
           <label className="submit-label">City:</label>
@@ -320,7 +319,7 @@ function SubmitForm() {
             type="text"
             value={address.city}
             onChange={(e) => setAddress({ ...address, city: e.target.value })}
-            // required={true}
+            required={true}
           />
 
           <label className="submit-label">Zip:</label>
@@ -329,7 +328,7 @@ function SubmitForm() {
             type="text"
             value={address.zip}
             onChange={(e) => setAddress({ ...address, zip: e.target.value })}
-            // required={true}
+            required={true}
           />
 
           <label className="submit-label">Phone:</label>
@@ -338,7 +337,7 @@ function SubmitForm() {
             type="text"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            // required={true}
+            required={true}
           />
         </div>
         Other Last Names Used:
@@ -443,6 +442,7 @@ function SubmitForm() {
           <label className="submit-label">Bus Ticket:</label>
           <select
             className="submit-input"
+            type="text"
             value={helpRequest.busTicket}
             onChange={(e) =>
               setHelpRequest({ ...helpRequest, busTicket: e.target.value })
@@ -494,14 +494,11 @@ function SubmitForm() {
           </label>
           <input
             className="submit-input"
-            type="Number"
+            type="number"
             value={IdSource.ssn}
             onChange={(e) => {
               if (e.target.value.length <= 4) {
-                setIdSource({
-                  ...IdSource,
-                  socialSecurity: e.target.value,
-                });
+                setIdSource({ ...IdSource, ssn: e.target.value });
               }
             }}
           />
@@ -607,9 +604,9 @@ function SubmitForm() {
           <label className="submit-label">Children's School District:</label>
           <input
             type="text"
-            value={children.schoolDist}
+            value={children.schoolDistrict}
             onChange={(e) =>
-              setChildren({ ...children, schoolDist: e.target.value })
+              setChildren({ ...children, schoolDistrict: e.target.value })
             }
           />
 
@@ -729,17 +726,13 @@ function SubmitForm() {
 
             <label className="submit-label">Age:</label>
             <input
-              type="text"
+              type="number"
               value={adults.adultInformation1.adultAge1}
-              onChange={(e) =>
-                setAdults({
-                  ...adults,
-                  adultInformation1: {
-                    ...adults.adultInformation1,
-                    adultAge1: e.target.value,
-                  },
-                })
-              }
+              onChange={(e) => setAdults({ ...adults, 
+                adultInformation1: {
+                  ...adults.adultInformation1,
+                adultAge1: e.target.value }
+              })}
             />
 
             <label className="submit-label">Relationship:</label>
@@ -825,7 +818,7 @@ function SubmitForm() {
 
             <label className="submit-label">Age:</label>
             <input
-              type="text"
+              type="number"
               value={adults.adultInformation2.adultAge2}
               onChange={(e) =>
                 setAdults({
@@ -921,7 +914,7 @@ function SubmitForm() {
 
                 <label className="submit-label">Age:</label>
                 <input
-                  type="text"
+                  type="number"
                   value={adults.adultInformation3.adultAge3}
                   onChange={(e) =>
                     setAdults({
@@ -1019,7 +1012,7 @@ function SubmitForm() {
 
                 <label className="submit-label">Age:</label>
                 <input
-                  type="text"
+                  type="number"
                   value={adults.adultInformation4.adultAge4}
                   onChange={(e) =>
                     setAdults({
@@ -1075,7 +1068,7 @@ function SubmitForm() {
             type="checkbox"
             value={landlord.interviewerCheck}
             onChange={(e) =>
-              setLandlord({ ...landlord, interviewerCheck: e.target.value })
+              setLandlord({ ...landlord, interviewerCheck: e.target.checked })
             }
           />
         </div>
@@ -1158,7 +1151,7 @@ function SubmitForm() {
           />
           <div>
             <label className="submit-label">
-              Number of members supported by this income:{" "}
+              Number of members supported by this income:
             </label>
             <input
               className="submit-input"
@@ -1180,13 +1173,13 @@ function SubmitForm() {
             </h3>
           </label>
         </div>
-        Please put the number of people next to the appropriate category.
-            The total of all numbers should equal the number of people living in
-            the household
+        Please put the number of people next to the appropriate category. The
+        total of all numbers should equal the number of people living in the
+        household
         <div className="demographics-container">
           <div className="demographics-column">
             <label className="submit-input">
-              American Indian or Alaska Native{" "}
+              American Indian/Alaska Native
             </label>
             <input
               className="submit-input"
@@ -1200,7 +1193,7 @@ function SubmitForm() {
                 })
               }
             />
-            <label className="submit-input">Asian </label>
+            <label className="submit-input">Asian/Asian American </label>
             <input
               className="submit-input"
               type="number"
@@ -1210,7 +1203,7 @@ function SubmitForm() {
                 setDemographics({ ...demographics, numAsian: e.target.value })
               }
             />
-            <label className="submit-input">Black or African American </label>
+            <label className="submit-input">Black/African American </label>
             <input
               className="submit-input"
               type="number"
@@ -1221,7 +1214,7 @@ function SubmitForm() {
               }
             />
             <label className="submit-input">
-              Latino, Latino American, Hispanic{" "}
+              Latino, Latino American, Hispanic
             </label>
             <input
               className="submit-input"
@@ -1238,7 +1231,7 @@ function SubmitForm() {
           </div>
           <div className="demographics-column">
             <label className="submit-input">
-              Native American / Pacific Islander{" "}
+              Native American/Pacific Islander
             </label>
             <input
               className="submit-input"

@@ -46,12 +46,13 @@ const ApplicantSchema = new mongoose.Schema({
     rent: String,
     gasoline: String,
     licensePlate: String,
+    busTicket: String,
     food: String,
   },
   IdSource: {
     license: String,
     expDate: Date,
-    snn: Number,
+    ssn: Number,
   },
   singleMale: { 
     type: Boolean
@@ -126,7 +127,7 @@ const ApplicantSchema = new mongoose.Schema({
 
     // start income
     income: {
-      totalIncome: String,
+      totalIncome: String, 
       monthlyIncome: String,
       numberMembers: Number,
     },
