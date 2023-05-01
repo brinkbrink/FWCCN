@@ -232,24 +232,25 @@ function SubmitForm() {
   return (
     <div className="form">
       <form className="submit-form" onSubmit={handleSubmit}>
-        <h2>FWCCN Intake Form</h2>
         {/* Primary Applicant Section */}
-        <div>
+        <div className="form-section">
           <label className="submit-category">
             <h3>
               <u>Primary Applicant</u>
             </h3>
           </label>
-          <div>
-            <label className="submit-label">Application Date:</label>
+
+          <div> 
+            <label className="submit-label">Application Date (Required):</label>
             <input
               className="submit-input"
               type="date"
               value={appDate}
               onChange={(e) => setAppDate(e.target.value)}
             />
-          </div>
-          <label className="submit-label">Last Name*:</label>
+          </div> 
+
+          <label className="submit-label">Last Name (Required):</label>
           <input
             className="submit-input"
             type="text"
@@ -260,7 +261,7 @@ function SubmitForm() {
             required={true}
           />
 
-          <label className="submit-label">Middle Name:</label>
+          <label className="submit-label">Middle Name (Optional):</label>
           <input
             className="submit-input"
             type="text"
@@ -270,7 +271,7 @@ function SubmitForm() {
             }
           />
 
-          <label className="submit-label">First Name*:</label>
+          <label className="submit-label">First Name (Required):</label>
           <input
             className="submit-input"
             type="text"
@@ -280,68 +281,9 @@ function SubmitForm() {
             }
             required={true}
           />
-        </div>
+          
         <div>
-          <label className="submit-label">Gender:</label>
-          <select
-            className="submit-input"
-            value={gender}
-            onChange={(e) => setGender(e.target.value)}
-          >
-            <option value={null}>Select</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-          </select>
-
-          <label className="submit-label">Age:</label>
-          <input
-            className="submit-input"
-            type="number"
-            value={age}
-            onChange={(e) => setAge(e.target.value)}
-            required={true}
-            min={18}
-          />
-        </div>
-        <div>
-          <label className="submit-label">Address:</label>
-          <input
-            className="submit-input"
-            type="text"
-            value={address.street}
-            onChange={(e) => setAddress({ ...address, street: e.target.value })}
-            required={true}
-          />
-
-          <label className="submit-label">City:</label>
-          <input
-            className="submit-input"
-            type="text"
-            value={address.city}
-            onChange={(e) => setAddress({ ...address, city: e.target.value })}
-            required={true}
-          />
-
-          <label className="submit-label">Zip:</label>
-          <input
-            className="submit-input"
-            type="text"
-            value={address.zip}
-            onChange={(e) => setAddress({ ...address, zip: e.target.value })}
-            required={true}
-          />
-
-          <label className="submit-label">Phone:</label>
-          <input
-            className="submit-input"
-            type="text"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            required={true}
-          />
-        </div>
-        Other Last Names Used:
-        <div>
+          <p>Other Last Names Used (Optional):</p>
           <label className="submit-label">Last Name 1:</label>
           <input
             className="submit-input"
@@ -354,6 +296,7 @@ function SubmitForm() {
               })
             }
           />
+          
           <label className="submit-label">Last Name 2:</label>
           <input
             className="submit-input"
@@ -366,6 +309,7 @@ function SubmitForm() {
               })
             }
           />
+          
           <label className="submit-label">Last Name 3:</label>
           <input
             className="submit-input"
@@ -379,8 +323,74 @@ function SubmitForm() {
             }
           />
         </div>
-        <div>
-          <label className="submit-label">Homeless:</label>
+        </div>         {/* End name section */}
+        
+        <div className="form-section">
+          <label className="submit-label">Gender (Required):</label>
+          <select
+            className="submit-input"
+            value={gender}
+            onChange={(e) => setGender(e.target.value)}
+          >
+            <option value={null}>Select</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+          </div> {/* End gender section */}
+
+        <div className="form-section">
+          <label className="submit-label">Age (Required):</label>
+          <input
+            className="submit-input"
+            type="number"
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
+            required={true}
+            min={18}
+          />
+        </div> {/* End age section */}
+        
+        <div className="form-section">
+          <label className="submit-label">Address (Required):</label>
+          <input
+            className="submit-input"
+            type="text"
+            value={address.street}
+            onChange={(e) => setAddress({ ...address, street: e.target.value })}
+            required={true}
+          />
+
+          <label className="submit-label">City (Required):</label>
+          <input
+            className="submit-input"
+            type="text"
+            value={address.city}
+            onChange={(e) => setAddress({ ...address, city: e.target.value })}
+            required={true}
+          />
+
+          <label className="submit-label">Zip (Required): </label>
+          <input
+            className="submit-input"
+            type="text"
+            value={address.zip}
+            onChange={(e) => setAddress({ ...address, zip: e.target.value })}
+            required={true}
+          />
+
+          <label className="submit-label">Phone (Required):</label>
+          <input
+            className="submit-input"
+            type="text"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            required={true}
+          />
+        </div>
+
+
+        <div className="form-section">
+          <label className="submit-label">Homeless (Required):</label>
           <select
             className="submit-input"
             value={homeless}
@@ -391,7 +401,7 @@ function SubmitForm() {
             <option value="No">No</option>
           </select>
 
-          <label className="submit-label">Disabled:</label>
+          <label className="submit-label">Disabled (Required):</label>
           <select
             className="submit-input"
             value={disabled}
@@ -402,9 +412,10 @@ function SubmitForm() {
             <option value="No">No</option>
           </select>
         </div>
-        Help Request:
-        <div>
-          <label className="submit-label">Rent:</label>
+        
+        <div className="form-section">
+        <p>Help Request:</p>
+          <label className="submit-label">Rent (Required):</label>
           <select
             className="submit-input"
             value={helpRequest.rent}
@@ -417,7 +428,7 @@ function SubmitForm() {
             <option value="No">No</option>
           </select>
 
-          <label className="submit-label">Gasoline:</label>
+          <label className="submit-label">Gasoline (Required):</label>
           <select
             className="submit-input"
             value={helpRequest.gasoline}
@@ -429,7 +440,7 @@ function SubmitForm() {
             <option value="Yes">Yes</option>
             <option value="No">No</option>
           </select>
-          <label className="submit-label">License Plate #:</label>
+          <label className="submit-label">License Plate # (Optional):</label>
           <input
             className="submit-input"
             type="text"
@@ -439,7 +450,7 @@ function SubmitForm() {
             }
           />
 
-          <label className="submit-label">Bus Ticket:</label>
+          <label className="submit-label">Bus Ticket (Required):</label>
           <select
             className="submit-input"
             type="text"
@@ -453,7 +464,7 @@ function SubmitForm() {
             <option value="No">No</option>
           </select>
 
-          <label className="submit-label">Food:</label>
+          <label className="submit-label">Food (Required):</label>
           <select
             className="submit-input"
             value={helpRequest.food}
@@ -467,9 +478,10 @@ function SubmitForm() {
           </select>
         </div>
         {/* ID Source Section */}
-        ID Source:
-        <div>
-          <label className="submit-label">Driver's License:</label>
+        
+        <div className="form-section">
+          <p>ID Source:</p>
+          <label className="submit-label">Driver's License (Required):</label>
           <input
             className="submit-input"
             type="text"
@@ -479,7 +491,7 @@ function SubmitForm() {
             }
           />
 
-          <label className="submit-label">Expiration Date:</label>
+          <label className="submit-label">Expiration Date (Required):</label>
           <input
             className="submit-input"
             type="date"
@@ -490,7 +502,7 @@ function SubmitForm() {
           />
 
           <label className="submit-label">
-            Social Security: (Last 4 digits)
+            Social Security: (Last 4 digits) (Required)
           </label>
           <input
             className="submit-input"
@@ -503,8 +515,9 @@ function SubmitForm() {
             }}
           />
         </div>
-        <div>
-          <label className="submit-label">Single Male:</label>
+        <div className="form-section">
+{/* TODO: Change to select yes or no (like with rent assistance) */}
+          <label className="submit-label">Single Male (Required):</label>
           <input
             className="submit-input"
             type="checkbox"
@@ -512,7 +525,7 @@ function SubmitForm() {
             onChange={(e) => setSingleMale(e.target.checked)}
           />
 
-          <label className="submit-label">Single Female:</label>
+          <label className="submit-label">Single Female (Required):</label>
           <input
             className="submit-input"
             type="checkbox"
@@ -522,30 +535,32 @@ function SubmitForm() {
         </div>
         {/* End Applicant Section */}
         {/* Start Children Section */}
-        <label className="submit-category">
-          <h3>
-            <u>Children:</u>
-          </h3>
-        </label>
+        <div className="form-section">
         <div>
-          <label className="submit-label">
-            Do you have children, under the age of 18, permanently living with
-            you?
+          <label className="submit-category">
+            <h3>
+              <u>Children:</u>
+            </h3>
           </label>
-          <select
-            className="submit-input"
-            value={children.isChildren}
-            onChange={(e) =>
-              setChildren({ ...children, isChildren: e.target.value })
-            }
-          >
-            <option value={null}>Select</option>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-          </select>
+            <label className="submit-label">
+              Do you have children, under the age of 18, permanently living with
+              you? (Required)
+            </label>
+            <select
+              className="submit-input"
+              value={children.isChildren}
+              onChange={(e) =>
+                setChildren({ ...children, isChildren: e.target.value })
+              }
+            >
+              <option value={null}>Select</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
         </div>
+
         <div>
-          <label className="submit-label">How many boys?:</label>
+          <label className="submit-label">How many boys? (Required):</label>
           <input
             className="submit-input"
             type="number"
@@ -556,7 +571,7 @@ function SubmitForm() {
             }
           />
           <label className="submit-label">
-            Age:
+          <label className="submit-label">Age (Required):</label>
             <input
               className="submit-input"
               type="text"
@@ -568,7 +583,7 @@ function SubmitForm() {
           </label>
         </div>
         <div>
-          <label className="submit-label">How many girls?:</label>
+          <label className="submit-label">How many girls? (Required):</label>
           <input
             className="submit-input"
             type="number"
@@ -578,7 +593,7 @@ function SubmitForm() {
               setChildren({ ...children, girlNumber: e.target.value })
             }
           />
-          <label className="submit-label">Age:</label>
+          <label className="submit-label">Age (Required):</label>
           <input
             className="submit-input"
             type="text"
@@ -590,7 +605,7 @@ function SubmitForm() {
         </div>
         <div>
           <label className="submit-label">
-            What is your relationship to the children?
+            What is your relationship to the children? (Required)
           </label>
           <input
             type="text"
@@ -601,7 +616,7 @@ function SubmitForm() {
           />
         </div>
         <div>
-          <label className="submit-label">Children's School District:</label>
+          <label className="submit-label">Children's School District (Required):</label>
           <input
             type="text"
             value={children.schoolDistrict}
@@ -610,7 +625,7 @@ function SubmitForm() {
             }
           />
 
-          <label className="submit-label">School Name:</label>
+          <label className="submit-label">School Name (Required):</label>
           <input
             type="text"
             value={children.schoolName}
@@ -619,17 +634,17 @@ function SubmitForm() {
             }
           />
         </div>
-        <div>
-          {/* End Children Section */}
+        </div> {/* End Children Section */}
 
-          {/* Start Other Adults Section */}
+        <div className="form-section"> {/* Start Other Adults Section */}
+          <div>
           <label className="submit-category">
             <h3>
-              <u>Other Adults:</u>
+              <u>Other Adults (Required):</u>
             </h3>
           </label>
           <label className="submit-label">
-            Do you have other adults (18 and over) living in the home?
+            Do you have other adults (18 and over) living in the home? (Required)
           </label>
           <select
             className="submit-input"
@@ -643,7 +658,7 @@ function SubmitForm() {
         </div>
         <div>
           <label className="submit-label">
-            Number of Adults: (including you)
+            Number of Adults (including you) (Required):
           </label>
           <select
             className="submit-input"
@@ -660,7 +675,7 @@ function SubmitForm() {
           </select>
         </div>
         <div>
-          <label className="submit-label">Last Name:</label>
+          <label className="submit-label">Last Name (Required):</label>
           <input
             type="text"
             value={adults.adultInformation1.lastName1} //this is where the error is
@@ -675,7 +690,7 @@ function SubmitForm() {
             }
           />
 
-          <label className="submit-label">Middle Name:</label>
+          <label className="submit-label">Middle Name (Optional):</label>
           <input
             type="text"
             value={adults.adultInformation1.middleName1}
@@ -690,7 +705,7 @@ function SubmitForm() {
             }
           />
 
-          <label className="submit-label">First Name:</label>
+          <label className="submit-label">First Name (Required):</label>
           <input
             type="text"
             value={adults.adultInformation1.firstName1}
@@ -705,7 +720,7 @@ function SubmitForm() {
             }
           />
           <div>
-            <label className="submit-label">Sex:</label>
+            <label className="submit-label">Sex (Required):</label>
             <select
               className="submit-input"
               value={adults.adultInformation1.adultSex1}
@@ -724,7 +739,7 @@ function SubmitForm() {
               <option value="Female">Female</option>
             </select>
 
-            <label className="submit-label">Age:</label>
+            <label className="submit-label">Age (Required):</label>
             <input
               type="number"
               value={adults.adultInformation1.adultAge1}
@@ -735,7 +750,7 @@ function SubmitForm() {
               })}
             />
 
-            <label className="submit-label">Relationship:</label>
+            <label className="submit-label">Relationship (Required):</label>
             <input
               type="text"
               value={adults.adultInformation1.adultRel1}
@@ -752,7 +767,7 @@ function SubmitForm() {
           </div>
         </div>
         <div>
-          <label className="submit-label">Last Name:</label>
+          <label className="submit-label">Last Name (Required):</label>
           <input
             type="text"
             value={adults.adultInformation2.lastName2}
@@ -767,7 +782,7 @@ function SubmitForm() {
             }
           />
 
-          <label className="submit-label">Middle Name:</label>
+          <label className="submit-label">Middle Name (Required):</label>
           <input
             type="text"
             value={adults.adultInformation2.middleName2}
@@ -782,7 +797,7 @@ function SubmitForm() {
             }
           />
 
-          <label className="submit-label">First Name:</label>
+          <label className="submit-label">First Name (Required):</label>
           <input
             type="text"
             value={adults.adultInformation2.firstName2}
@@ -797,7 +812,7 @@ function SubmitForm() {
             }
           />
           <div>
-            <label className="submit-label">Sex:</label>
+            <label className="submit-label">Sex(Required):</label>
             <select
               className="submit-input"
               value={adults.adultInformation2.adultSex2}
@@ -816,7 +831,7 @@ function SubmitForm() {
               <option value="Female">Female</option>
             </select>
 
-            <label className="submit-label">Age:</label>
+            <label className="submit-label">Age (Required):</label>
             <input
               type="number"
               value={adults.adultInformation2.adultAge2}
@@ -831,7 +846,7 @@ function SubmitForm() {
               }
             />
 
-            <label className="submit-label">Relationship:</label>
+            <label className="submit-label">Relationship (Required):</label>
             <input
               type="text"
               value={adults.adultInformation2.adultRel2}
@@ -848,7 +863,7 @@ function SubmitForm() {
           </div>
           {adults.numberOfAdults > 2 && (
             <div>
-              <label className="submit-label">Last Name:</label>
+              <label className="submit-label">Last Name (Required):</label>
               <input
                 type="text"
                 value={adults.adultInformation3.lastName3}
@@ -863,7 +878,7 @@ function SubmitForm() {
                 }
               />
 
-              <label className="submit-label">Middle Name:</label>
+              <label className="submit-label">Middle Name (Required):</label>
               <input
                 type="text"
                 value={adults.adultInformation3.middleName3}
@@ -878,7 +893,7 @@ function SubmitForm() {
                 }
               />
 
-              <label className="submit-label">First Name:</label>
+              <label className="submit-label">First Name (Required):</label>
               <input
                 type="text"
                 value={adults.adultInformation3.firstName3}
@@ -893,7 +908,7 @@ function SubmitForm() {
                 }
               />
               <div>
-                <label className="submit-label">Sex:</label>
+                <label className="submit-label">Sex (Required):</label>
                 <select
                   className="submit-input"
                   value={adults.adultInformation3.adultSex3}
@@ -912,7 +927,7 @@ function SubmitForm() {
                   <option value="Female">Female</option>
                 </select>
 
-                <label className="submit-label">Age:</label>
+                <label className="submit-label">Age (Required):</label>
                 <input
                   type="number"
                   value={adults.adultInformation3.adultAge3}
@@ -927,7 +942,7 @@ function SubmitForm() {
                   }
                 />
 
-                <label className="submit-label">Relationship:</label>
+                <label className="submit-label">Relationship (Required):</label>
                 <input
                   type="text"
                   value={adults.adultInformation3.adultRel3}
@@ -946,7 +961,7 @@ function SubmitForm() {
           )}
           {adults.numberOfAdults === "4" && (
             <div>
-              <label className="submit-label">Last Name:</label>
+              <label className="submit-label">Last Name (Required):</label>
               <input
                 type="text"
                 value={adults.adultInformation4.lastName4}
@@ -961,7 +976,7 @@ function SubmitForm() {
                 }
               />
 
-              <label className="submit-label">Middle Name:</label>
+              <label className="submit-label">Middle Name (Required):</label>
               <input
                 type="text"
                 value={adults.adultInformation4.middleName4}
@@ -976,7 +991,7 @@ function SubmitForm() {
                 }
               />
 
-              <label className="submit-label">First Name:</label>
+              <label className="submit-label">First Name (Required):</label>
               <input
                 type="text"
                 value={adults.adultInformation4.firstName4}
@@ -991,7 +1006,7 @@ function SubmitForm() {
                 }
               />
               <div>
-                <label className="submit-label">Sex:</label>
+                <label className="submit-label">Sex (Required):</label>
                 <select
                   className="submit-input"
                   value={adults.adultInformation4.adultSex4}
@@ -1010,7 +1025,7 @@ function SubmitForm() {
                   <option value="Female">Female</option>
                 </select>
 
-                <label className="submit-label">Age:</label>
+                <label className="submit-label">Age (Required):</label>
                 <input
                   type="number"
                   value={adults.adultInformation4.adultAge4}
@@ -1025,7 +1040,7 @@ function SubmitForm() {
                   }
                 />
 
-                <label className="submit-label">Relationship:</label>
+                <label className="submit-label">Relationship (Required):</label>
                 <input
                   type="text"
                   value={adults.adultInformation4.adultRel4}
@@ -1043,8 +1058,10 @@ function SubmitForm() {
             </div>
           )}
         </div>
-        {/* End Adults Section */}
+        </div> {/* End Adults Section */}
+        
         {/* Start Apartment / Landlord Section */}
+        <div className="form-section">
         <div>
           <label className="submit-category">
             <h3>
@@ -1053,7 +1070,7 @@ function SubmitForm() {
           </label>
         </div>
         <div>
-          <label className="submit-label">Apartment/Landlord Name:</label>
+          <label className="submit-label">Apartment/Landlord Name (Required):</label>
           <input
             className="submit-input"
             type="text"
@@ -1062,7 +1079,7 @@ function SubmitForm() {
               setLandlord({ ...landlord, landlordName: e.target.value })
             }
           />
-          <label className="submit-label">Interviewer Check Name: </label>
+          <label className="submit-label">Interviewer Check Name (Required): </label>
           <input
             className="submit-input"
             type="checkbox"
@@ -1073,7 +1090,7 @@ function SubmitForm() {
           />
         </div>
         <div>
-          <label className="submit-label">Street Address:</label>
+          <label className="submit-label">Street Address (Required):</label>
           <input
             className="submit-input"
             type="text"
@@ -1082,21 +1099,21 @@ function SubmitForm() {
               setLandlord({ ...landlord, street: e.target.value })
             }
           />
-          <label className="submit-label">City: </label>
+          <label className="submit-label">City (Required): </label>
           <input
             className="submit-input"
             type="text"
             value={landlord.city}
             onChange={(e) => setLandlord({ ...landlord, city: e.target.value })}
           />
-          <label className="submit-label">Zip: </label>
+          <label className="submit-label">Zip (Required): </label>
           <input
             className="submit-input"
             type="text"
             value={landlord.zip}
             onChange={(e) => setLandlord({ ...landlord, zip: e.target.value })}
           />
-          <label className="submit-label">Phone: </label>
+          <label className="submit-label">Phone (Required): </label>
           <input
             className="submit-input"
             type="text"
@@ -1106,8 +1123,9 @@ function SubmitForm() {
             }
           />
         </div>
-        {/* End Apartment / Landlord Section */}
-        {/* Start Income Section */}
+        </div> {/* End Apartment / Landlord Section */}
+        
+        <div className="form-section"> {/* Start Income Section */}
         <div>
           <label className="submit-category">
             <h3>
@@ -1116,7 +1134,7 @@ function SubmitForm() {
           </label>
         </div>
         <div>
-          <label className="submit-label">Total Income:</label>
+          <label className="submit-label">Total Income (Required):</label>
           <input
             className="submit-input"
             type="text"
@@ -1133,7 +1151,7 @@ function SubmitForm() {
             }}
           />
 
-          <label className="submit-label">Monthly Income: </label>
+          <label className="submit-label">Monthly Income (Required): </label>
           <input
             className="submit-input"
             type="text"
@@ -1151,7 +1169,7 @@ function SubmitForm() {
           />
           <div>
             <label className="submit-label">
-              Number of members supported by this income:
+              Number of members supported by this income (Required):
             </label>
             <input
               className="submit-input"
@@ -1164,8 +1182,9 @@ function SubmitForm() {
             />
           </div>
         </div>
-        {/* End Income Section */}
-        {/* Start Demographics Section */}
+        </div> {/* End Income Section */}
+        
+        <div className="form-section"> {/* Start Demographics Section */}
         <div>
           <label className="submit-category">
             <h3>
@@ -1175,7 +1194,7 @@ function SubmitForm() {
         </div>
         Please put the number of people next to the appropriate category. The
         total of all numbers should equal the number of people living in the
-        household
+        household (Required)
         <div className="demographics-container">
           <div className="demographics-column">
             <label className="submit-input">
@@ -1292,8 +1311,8 @@ function SubmitForm() {
             />
           </div>
         </div>
-        {/* End Demographics Section */}
-        <button className="submit-button">Submit</button>
+        </div> {/* End Demographics Section */}
+        <button className="submit-button">Submit</button> <button className="submit-button">Save</button> <button className="submit-button">Cancel</button>
       </form>
     </div>
   );

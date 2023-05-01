@@ -6,7 +6,7 @@ function App() {
     return (
         <div className="App">
             <div className="organization-display">
-                <h1>Federal Way Community Caregiving Networking</h1>
+                <h1>FWCCN Intake Form</h1>
             </div>
             <SubmitForm />   
         </div>
