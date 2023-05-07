@@ -441,6 +441,7 @@ function SubmitForm() {
             <option value="No">No</option>
           </select>
           <label className="submit-label">License Plate # (Optional):</label>
+          { /* TODO: Create logic to only have license plate # pop up if yes is selected??*/ }
           <input
             className="submit-input"
             type="text"
@@ -659,6 +660,7 @@ function SubmitForm() {
         <div>
           <label className="submit-label">
             Number of Adults (including you) (Required):
+            {/* TODO: create logic to pop up fields according to input of number of adults */}
           </label>
           <select
             className="submit-input"
