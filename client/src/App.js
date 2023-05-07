@@ -1,51 +1,31 @@
-import './App.css';
-import {useState, useEffect} from 'react';
+import React from 'react';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter as Router, Route} from "react-router-dom";
+
+import Navbar from "./components/navbar.component";
+import ApplicantList from "./components/applicant-list.component";
+import UpdateApplicant from "./components/update-applicant.component";
+import CreateApplicant from "./components/create-applicant.component";
+
 
 function App() {
-    const [applicants, setApplicants] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+   return( 
 
-    useEffect(() => {
-        fetch('http://localhost:3000/applicants')
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    throw new Error('Something went wrong');
-                }
-            })
-            .then(data => {
-                setApplicants(data);
-                setLoading(false);
-            })
-            .catch(err => {
-                setError(err);
-                setLoading(false);
-            });
-    }, []);
-
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-    if (error) {
-        return <div>Error: {error.message}</div>;
-    }
-    return (
-        <div className="App">
-            <div className="applicant-display">
-                <h1>Applicants</h1>
-                <div className="applicant-list">
-                    {applicants.map(applicant => (
-                        <div className="applicant" key={applicant._id}>
-                            <p>ID: {applicant._id}</p>
-                            <p>Last Name: {applicant.lastName}</p>
-                            <p>First Name: {applicant.firstName}</p>
-                        </div>
-                    ))}
-                </div>
-            </div>
+    <Router>
+        <div className = "container">
+            <Navbar/>
+            <br/>
+            <Route path="/" exact component = {ApplicantList} />
+            <Route path="/edit/:id" component= {UpdateApplicant}/>
+            <Route path= "/create" component={CreateApplicant}/> 
         </div>
+    </Router>
+  
+   /** 
+        <div className = "container">
+            Hello World!
+        </div>
+        */
     );
 }
 
