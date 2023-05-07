@@ -55,10 +55,10 @@ const ApplicantSchema = new mongoose.Schema({
     ssn: Number,
   },
   singleMale: { 
-    type: Boolean
+    type: String
    },
   singleFemale: { 
-    type: Boolean
+    type: String
    },
    // end applicant
 
@@ -117,7 +117,7 @@ const ApplicantSchema = new mongoose.Schema({
     // start apartment/landlord
     landlord: {
       landlordName: String,
-      interviewerCheck: Boolean,
+      interviewerCheck: String,
       street: String,
       city: String,
       zip: String,

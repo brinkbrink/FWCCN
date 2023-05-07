@@ -14,33 +14,34 @@ This is a project to create a virtual intake form for the Federal Way Community 
 # Technologies Used:
 
 * MERN Stack (MongoDB, Express, React, Node)
-* Bootstrap
 
 # Getting Started:
 * Clone the repository
     * `git clone https://github.com/brinkbrink/FWCCN.git`
-* Create a branch
-    * `git branch <yourname>`
-* Switch to your branch
-    * `git checkout <yourname>`
 * Install the packages
-    * `npm init -y`
-    * `npm install express mongoose cors nodemon dotenv`
+    * Open terminal in the client folder
+        * `npm install`
+    * Open terminal in the server folder
+        * `npm install`
 * Run the application
-    * Go to the server folder
-        * `npm start` 
-    * Go to the client folder
+    * Open terminal in the client folder
         * `npm start`
-* Open the application in your browser
-* Make changes
-* Check repo status
-    * `git status`
-* Add files
-    * `git add .`
-* Commit
-    * `git commit -m "your message here" `
-* Push
-    * `git push -u origin <your branch name>`
+    * Open terminal in the server folder
+        * `npm start` 
+* Common git commands
+    * Create a branch
+        * `git branch <your name>`
+    * Switch to your branch
+        * `git checkout <your name>`
+    * Make changes
+    * Check repo status
+        * `git status`
+    * Add files
+        * `git add .`
+    * Commit
+        * `git commit -m "your message here" `
+    * Push
+        * `git push -u origin <your branch name>`
 * Go to the github repo and make a pull request
 # Project Team:
 
