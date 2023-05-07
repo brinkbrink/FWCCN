@@ -345,9 +345,9 @@ function SubmitForm() {
               </div>
             ) : null}
           </div>
-        </div>
+        
         {/* End name section */}
-        <div className="form-section">
+        <div>
           <label className="submit-label">Gender (Required):</label>
           <select
             className="submit-input"
@@ -358,9 +358,8 @@ function SubmitForm() {
             <option value="Male">Male</option>
             <option value="Female">Female</option>
           </select>
-        </div>
-        {/* End gender section */}
-        <div className="form-section">
+        </div> {/* End gender section */}
+        <div>
           <label className="submit-label">Age (Required):</label>
           <input
             className="submit-input"
@@ -370,8 +369,8 @@ function SubmitForm() {
             required={true}
             min={18}
           />
+        </div> {/* End age section */}
         </div>
-        {/* End age section */}
         <div className="form-section">
           <label className="submit-label">Address (Required):</label>
           <input
@@ -409,6 +408,7 @@ function SubmitForm() {
             required={true}
           />
         </div>
+        {/* TODO: Maybe add the functionality for "Other adults" here so address only pops up if No is selected */}
         <div className="form-section">
           <label className="submit-label">Homeless (Required):</label>
           <select
