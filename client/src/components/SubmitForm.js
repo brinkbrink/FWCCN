@@ -463,6 +463,7 @@ function SubmitForm() {
             <option value="No">No</option>
           </select>
           <label className="submit-label">License Plate # (Optional):</label>
+          { /* TODO: Create logic to only have license plate # pop up if yes is selected??*/ }
           <input
             className="submit-input"
             type="text"
@@ -585,6 +586,214 @@ function SubmitForm() {
               <option value="Yes">Yes</option>
               <option value="No">No</option>
             </select>
+        </div>
+
+        <div>
+          <label className="submit-label">How many boys? (Required):</label>
+          <input
+            className="submit-input"
+            type="number"
+            min={0}
+            value={children.boyNumber}
+            onChange={(e) =>
+              setChildren({ ...children, boyNumber: e.target.value })
+            }
+          />
+          <label className="submit-label">
+          <label className="submit-label">Age (Required):</label>
+            <input
+              className="submit-input"
+              type="text"
+              value={children.boyAge}
+              onChange={(e) =>
+                setChildren({ ...children, boyAge: e.target.value })
+              }
+            />
+          </label>
+        </div>
+        <div>
+          <label className="submit-label">How many girls? (Required):</label>
+          <input
+            className="submit-input"
+            type="number"
+            min={0}
+            value={children.girlNumber}
+            onChange={(e) =>
+              setChildren({ ...children, girlNumber: e.target.value })
+            }
+          />
+          <label className="submit-label">Age (Required):</label>
+          <input
+            className="submit-input"
+            type="text"
+            value={children.girlAge}
+            onChange={(e) =>
+              setChildren({ ...children, girlAge: e.target.value })
+            }
+          />
+        </div>
+        <div>
+          <label className="submit-label">
+            What is your relationship to the children? (Required)
+          </label>
+          <input
+            type="text"
+            value={children.childRel}
+            onChange={(e) =>
+              setChildren({ ...children, childRel: e.target.value })
+            }
+          />
+        </div>
+        <div>
+          <label className="submit-label">Children's School District (Required):</label>
+          <input
+            type="text"
+            value={children.schoolDistrict}
+            onChange={(e) =>
+              setChildren({ ...children, schoolDistrict: e.target.value })
+            }
+          />
+
+          <label className="submit-label">School Name (Required):</label>
+          <input
+            type="text"
+            value={children.schoolName}
+            onChange={(e) =>
+              setChildren({ ...children, schoolName: e.target.value })
+            }
+          />
+        </div>
+        </div> {/* End Children Section */}
+
+        <div className="form-section"> {/* Start Other Adults Section */}
+          <div>
+          <label className="submit-category">
+            <h3>
+              <u>Other Adults (Required):</u>
+            </h3>
+          </label>
+          <label className="submit-label">
+            Do you have other adults (18 and over) living in the home? (Required)
+          </label>
+          <select
+            className="submit-input"
+            value={adults.isAdults}
+            onChange={(e) => setAdults({ ...adults, isAdults: e.target.value })}
+          >
+            <option value={null}>Select</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+        <div>
+          <label className="submit-label">
+            Number of Adults (including you) (Required):
+            {/* TODO: create logic to pop up fields according to input of number of adults */}
+          </label>
+          <select
+            className="submit-input"
+            min={1}
+            value={adults.numberOfAdults}
+            onChange={(e) =>
+              setAdults({ ...adults, numberOfAdults: e.target.value })
+            }
+          >
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+        </div>
+        <div>
+          <label className="submit-label">Last Name (Required):</label>
+          <input
+            type="text"
+            value={adults.adultInformation1.lastName1} //this is where the error is
+            onChange={(e) =>
+              setAdults({
+                ...adults,
+                adultInformation1: {
+                  ...adults.adultInformation1,
+                  lastName1: e.target.value,
+                },
+              })
+            }
+          />
+
+          <label className="submit-label">Middle Name (Optional):</label>
+          <input
+            type="text"
+            value={adults.adultInformation1.middleName1}
+            onChange={(e) =>
+              setAdults({
+                ...adults,
+                adultInformation1: {
+                  ...adults.adultInformation1,
+                  middleName1: e.target.value,
+                },
+              })
+            }
+          />
+
+          <label className="submit-label">First Name (Required):</label>
+          <input
+            type="text"
+            value={adults.adultInformation1.firstName1}
+            onChange={(e) =>
+              setAdults({
+                ...adults,
+                adultInformation1: {
+                  ...adults.adultInformation1,
+                  firstName1: e.target.value,
+                },
+              })
+            }
+          />
+          <div>
+            <label className="submit-label">Sex (Required):</label>
+            <select
+              className="submit-input"
+              value={adults.adultInformation1.adultSex1}
+              onChange={(e) =>
+                setAdults({
+                  ...adults,
+                  adultInformation1: {
+                    ...adults.adultInformation1,
+                    adultSex1: e.target.value,
+                  },
+                })
+              }
+            >
+              <option value={null}>Select</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+
+            <label className="submit-label">Age (Required):</label>
+            <input
+              type="number"
+              value={adults.adultInformation1.adultAge1}
+              onChange={(e) => setAdults({ ...adults, 
+                adultInformation1: {
+                  ...adults.adultInformation1,
+                adultAge1: e.target.value }
+              })}
+            />
+
+            <label className="submit-label">Relationship (Required):</label>
+            <input
+              type="text"
+              value={adults.adultInformation1.adultRel1}
+              onChange={(e) =>
+                setAdults({
+                  ...adults,
+                  adultInformation1: {
+                    ...adults.adultInformation1,
+                    adultRel1: e.target.value,
+                  },
+                })
+              }
+            />
           </div>
           {children.isChildren === "Yes" ? (
             <div>
