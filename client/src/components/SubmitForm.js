@@ -228,6 +228,9 @@ function SubmitForm() {
         console.log(data);
       });
   };
+  const handleIsChildrenChange = (e) => {
+    setChildren({ ...children, isChildren: e.target.value });
+  };
 
   return (
     <div className="form">
@@ -562,109 +565,122 @@ function SubmitForm() {
         </div>
         {/* End Applicant Section */}
 
-        {/* Start Children Section */}
-        <div className="form-section">
-          <div>
-            <label className="submit-category">
-              <h3>
-                <u>Children:</u>
-              </h3>
-            </label>
-            <label className="submit-label">
-              Do you have children, under the age of 18, permanently living with
-              you? (Required)
-            </label>
-            <select
-              className="submit-input"
-              value={children.isChildren}
-              required={true}
-              onChange={(e) =>
-                setChildren({ ...children, isChildren: e.target.value })
-              }
-            >
-              <option value={null}>Select</option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
-        </div>
+       {/* StartChildrenSection  */}
 
+        <div className="form-section">
+      <div>
+        <label className="submit-category">
+          <h3>
+            <u>Children:</u>
+          </h3>
+        </label>
+        <label className="submit-label">
+          Do you have children, under the age of 18, permanently living with
+          you? (Required)
+        </label>
+        <select
+          className="submit-input"
+          value={children.isChildren}
+          required={true}
+          onChange={handleIsChildrenChange}
+        >
+          <option value={null}>Select</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+
+      {children.isChildren === "Yes" && (
         <div>
-          <label className="submit-label">How many boys? (Required):</label>
-          <input
-            className="submit-input"
-            type="number"
-            min={0}
-            value={children.boyNumber}
-            onChange={(e) =>
-              setChildren({ ...children, boyNumber: e.target.value })
-            }
-          />
-          <label className="submit-label">
-          <label className="submit-label">Age (Required):</label>
+          <div>
+            <label className="submit-label">
+              How many boys? (Required):
+            </label>
             <input
               className="submit-input"
-              type="text"
-              value={children.boyAge}
+              type="number"
+              min={0}
+              value={children.boyNumber}
               onChange={(e) =>
-                setChildren({ ...children, boyAge: e.target.value })
+                setChildren({ ...children, boyNumber: e.target.value })
               }
             />
-          </label>
-        </div>
-        <div>
-          <label className="submit-label">How many girls? (Required):</label>
-          <input
-            className="submit-input"
-            type="number"
-            min={0}
-            value={children.girlNumber}
-            onChange={(e) =>
-              setChildren({ ...children, girlNumber: e.target.value })
-            }
-          />
-          <label className="submit-label">Age (Required):</label>
-          <input
-            className="submit-input"
-            type="text"
-            value={children.girlAge}
-            onChange={(e) =>
-              setChildren({ ...children, girlAge: e.target.value })
-            }
-          />
-        </div>
-        <div>
-          <label className="submit-label">
-            What is your relationship to the children? (Required)
-          </label>
-          <input
-            type="text"
-            value={children.childRel}
-            onChange={(e) =>
-              setChildren({ ...children, childRel: e.target.value })
-            }
-          />
-        </div>
-        <div>
-          <label className="submit-label">Children's School District (Required):</label>
-          <input
-            type="text"
-            value={children.schoolDistrict}
-            onChange={(e) =>
-              setChildren({ ...children, schoolDistrict: e.target.value })
-            }
-          />
+            <label className="submit-label">
+              Age (Required):
+              <input
+                className="submit-input"
+                type="text"
+                value={children.boyAge}
+                onChange={(e) =>
+                  setChildren({ ...children, boyAge: e.target.value })
+                }
+              />
+            </label>
+          </div>
+          <div>
+            <label className="submit-label">
+              How many girls? (Required):
+            </label>
+            <input
+              className="submit-input"
+              type="number"
+              min={0}
+              value={children.girlNumber}
+              onChange={(e) =>
+                setChildren({ ...children, girlNumber: e.target.value })
+              }
+            />
+            <label className="submit-label">
+              Age (Required):
+              <input
+                className="submit-input"
+                type="text"
+                value={children.girlAge}
+                onChange={(e) =>
+                  setChildren({ ...children, girlAge: e.target.value })
+                }
+              />
+            </label>
+          </div>
+          <div>
+            <label className="submit-label">
+              What is your relationship to the children? (Required)
+            </label>
+            <input
+              type="text"
+              value={children.childRel}
+              onChange={(e) =>
+                setChildren({ ...children, childRel: e.target.value })
+              }
+            />
+          </div>
+          <div>
+            <label className="submit-label">
+              Children's School District (Required):
+            </label>
+            <input
+              type="text"
+              value={children.schoolDistrict}
+              onChange={(e) =>
+                setChildren({ ...children, schoolDistrict: e.target.value })
+              }
+            />
 
-          <label className="submit-label">School Name (Required):</label>
-          <input
-            type="text"
-            value={children.schoolName}
-            onChange={(e) =>
-              setChildren({ ...children, schoolName: e.target.value })
-            }
-          />
+            <label className="submit-label">School Name (Required):</label>
+            <input
+              type="text"
+              value={children.schoolName}
+              onChange={(e) =>
+                setChildren({ ...children, schoolName: e.target.value })
+              }
+            />
+          </div>
         </div>
-        </div> {/* End Children Section */}
+      )}
 
+</div>
+
+       {/* End Children Section */}
 
 
         {/* Start Other Adults Section */}
