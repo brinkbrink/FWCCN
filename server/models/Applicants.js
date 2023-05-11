@@ -1,3 +1,4 @@
+// This file is used to create the schema for the data that is being sent to the server
 const mongoose = require("mongoose");
 
 const ApplicantSchema = new mongoose.Schema({
@@ -21,12 +22,6 @@ const ApplicantSchema = new mongoose.Schema({
     street: String,
     city: String,
     zip: String,
-  },
-  city: {
-    type: String,
-  },
-  zip: {
-    type: String,
   },
   phone: {
     type: String,
@@ -69,7 +64,7 @@ const ApplicantSchema = new mongoose.Schema({
     boyAge: String,
     girlNumber: Number,
     girlAge: String,
-    chilRel: String,
+    childrenRel: String,
     schoolDistrict: String, 
     schoolName: String,
     },
@@ -77,7 +72,7 @@ const ApplicantSchema = new mongoose.Schema({
 
     // start adults
    adults: {
-    isAdult: String,
+    isAdults: String,
     adultNumber: Number,
     adultInformation1: {
       lastName1: String,

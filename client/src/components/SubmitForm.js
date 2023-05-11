@@ -40,7 +40,7 @@ function SubmitForm() {
     boyAge: "",
     girlNumber: "",
     girlAge: "",
-    childRel: "",
+    childrenRel: "",
     schoolDistrict: "",
     schoolName: "",
   });
@@ -157,7 +157,7 @@ function SubmitForm() {
           boyAge: children.boyAge,
           girlNumber: children.girlNumber,
           girlAge: children.girlAge,
-          childRel: children.childRel,
+          childrenRel: children.childrenRel,
           schoolDistrict: children.schoolDistrict,
           schoolName: children.schoolName,
         },
@@ -586,8 +586,87 @@ function SubmitForm() {
               <option value="Yes">Yes</option>
               <option value="No">No</option>
             </select>
+          </div>
+          {children.isChildren === "Yes" ? (
+            <div>
+              <div>
+                <label className="submit-label">
+                  How many boys? (Required):
+                </label>
+                <input
+                  className="submit-input"
+                  type="number"
+                  min={0}
+                  value={children.boyNumber}
+                  required={true}
+                  onChange={(e) =>
+                    setChildren({ ...children, boyNumber: e.target.value })
+                  }
+                />
+                <label className="submit-label">
+                  <label className="submit-label">Age (Required):</label>
+                  <input
+                    className="submit-input"
+                    type="text"
+                    value={children.boyAge}
+                    required={true}
+                    onChange={(e) =>
+                      setChildren({ ...children, boyAge: e.target.value })
+                    }
+                  />
+                </label>
+              </div>
+              <div>
+                <label className="submit-label">
+                  How many girls? (Required):
+                </label>
+                <input
+                  className="submit-input"
+                  type="number"
+                  min={0}
+                  value={children.girlNumber}
+                  required={true}
+                  onChange={(e) =>
+                    setChildren({ ...children, girlNumber: e.target.value })
+                  }
+                />
+                <label className="submit-label">Age (Required):</label>
+                <input
+                  className="submit-input"
+                  type="text"
+                  value={children.girlAge}
+                  required={true}
+                  onChange={(e) =>
+                    setChildren({ ...children, girlAge: e.target.value })
+                  }
+                />
+              </div>
+              <div>
+                <label className="submit-label">
+                  What is your relationship to the children? (Required)
+                </label>
+                <input
+                  type="text"
+                  value={children.childrenRel}
+                  required={true}
+                  onChange={(e) =>
+                    setChildren({ ...children, childrenRel: e.target.value })
+                  }
+                />
+              </div>
+              <div>
+                <label className="submit-label">
+                  Children's School District (Required):
+                </label>
+                <input
+                  type="text"
+                  value={children.schoolDistrict}
+                  required={true}
+                  onChange={(e) =>
+                    setChildren({ ...children, schoolDistrict: e.target.value })
+                  }
+                />
         </div>
-
         <div>
           <label className="submit-label">How many boys? (Required):</label>
           <input
@@ -663,9 +742,8 @@ function SubmitForm() {
             }
           />
         </div>
-        </div> {/* End Children Section */}
-
-
+        </div>
+        {/* End Children Section */}
 
         {/* Start Other Adults Section */}
         <div className="form-section">

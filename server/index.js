@@ -1,12 +1,14 @@
+// This file is used to create the main server file
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const ApplicantModel = require('./models/Applicants');
 const cors = require('cors');
-
 app.use(express.json());
 app.use(cors());
+const { validateApplicant } = require('./routes/validation');
+
 
 dotenv.config()
 // Replace the uri string with your connection string.
@@ -17,15 +19,19 @@ const uri = `mongodb+srv://${db_username}:${db_password}@${db_url}?retryWrites=t
 
 mongoose.connect(uri);
 
-//TODO: test/fix endpoints...model.find no longer accepts a callback error
-
-app.post("/createApplicants", async (req, res) => {
+// This is the endpoint that will be used to create a new applicant
+app.post("/createApplicants", validateApplicant, async (req,res) => {
     const applicant = req.body;
     const newApplicant = new ApplicantModel(applicant);
-    await newApplicant.save();
-})
+    try {
+        await newApplicant.save();
+        res.send("insert data successfully");
+    } catch (error) {
+        console.log(error)
+    }
+});
 
-// fixed endpoint
+// This is the endpoint that will be used to get all applicants
 app.get("/getApplicants", async (req,res) => {
     try {
         const result = await ApplicantModel.find({});
