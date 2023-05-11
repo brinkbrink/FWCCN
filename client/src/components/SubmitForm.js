@@ -40,7 +40,7 @@ function SubmitForm() {
     boyAge: "",
     girlNumber: "",
     girlAge: "",
-    childRel: "",
+    childrenRel: "",
     schoolDistrict: "",
     schoolName: "",
   });
@@ -157,7 +157,7 @@ function SubmitForm() {
           boyAge: children.boyAge,
           girlNumber: children.girlNumber,
           girlAge: children.girlAge,
-          childRel: children.childRel,
+          childrenRel: children.childrenRel,
           schoolDistrict: children.schoolDistrict,
           schoolName: children.schoolName,
         },
@@ -646,10 +646,10 @@ function SubmitForm() {
                 </label>
                 <input
                   type="text"
-                  value={children.childRel}
+                  value={children.childrenRel}
                   required={true}
                   onChange={(e) =>
-                    setChildren({ ...children, childRel: e.target.value })
+                    setChildren({ ...children, childrenRel: e.target.value })
                   }
                 />
               </div>
