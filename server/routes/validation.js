@@ -1,6 +1,16 @@
 // This file is used to validate the data that is being sent to the server
 const Joi = require("@hapi/joi");
 
+const childrenSchema = Joi.object({
+  boyNumber: Joi.number().required(),
+  boyAge: Joi.string().required(),
+  girlNumber: Joi.number().required(),
+  girlAge: Joi.string().required(),
+  childrenRel: Joi.string().required(),
+  schoolDistrict: Joi.string().required(),
+  schoolName: Joi.string().required(),
+});
+
 const adultInformationSchema1 = Joi.object({
   lastName1: Joi.string().required(),
   middleName1: Joi.string().required(),
@@ -55,7 +65,9 @@ const validateApplicant = (req, res, next) => {
     age: Joi.number().required().min(18).max(100),
     address: Joi.object({
       street: Joi.string().required(),
-      city: Joi.string().required().messages({ "string.pattern.base": "City must be letters only" }),
+      city: Joi.string()
+        .required()
+        .messages({ "string.pattern.base": "City must be letters only" }),
       zip: Joi.string().required(),
     }),
     phone: Joi.string().required().min(10).max(10),
@@ -83,16 +95,12 @@ const validateApplicant = (req, res, next) => {
 
     children: Joi.object({
       isChildren: Joi.string().required(),
-      boyNumber: Joi.number().required(),
-      boyAge: Joi.string().required(),
-      girlNumber: Joi.number().required(),
-      girlAge: Joi.string().required(),
-      childrenRel: Joi.string().required(),
-      schoolDistrict: Joi.string().required(),
-      schoolName: Joi.string().required(),
+      childrenSchema: Joi.when("isChildren", {
+        is: "yes",
+        then: childrenSchema.required(),
+        otherwise: Joi.optional(),
+      }),
     }),
-
-    // if isAdult is yes, then the following fields are required
     adults: Joi.object({
       isAdults: Joi.string().required(),
       adultNumber: Joi.number().when("isAdult", {
@@ -126,7 +134,9 @@ const validateApplicant = (req, res, next) => {
       landlordName: Joi.string().required(),
       interviewerCheck: Joi.string().required(),
       street: Joi.string().required(),
-      city: Joi.string().required().messages({ "string.pattern.base": "City must be letters only" }),
+      city: Joi.string()
+        .required()
+        .messages({ "string.pattern.base": "City must be letters only" }),
       zip: Joi.string().required().min(5).max(5),
       phone: Joi.string().required().min(10).max(10),
     }),
