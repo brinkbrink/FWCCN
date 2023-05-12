@@ -95,11 +95,11 @@ const validateApplicant = (req, res, next) => {
 
     children: Joi.object({
       isChildren: Joi.string().required(),
-      childrenSchema: Joi.when("isChildren", {
+      }),
+      children: Joi.when("isChildren", {
         is: "yes",
         then: childrenSchema.required(),
         otherwise: Joi.optional(),
-      }),
     }),
     adults: Joi.object({
       isAdults: Joi.string().required(),
