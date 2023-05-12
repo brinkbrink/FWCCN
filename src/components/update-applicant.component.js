@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { useRef } from "react";
 
 export default class UpdateApplicant extends Component{
     render(){

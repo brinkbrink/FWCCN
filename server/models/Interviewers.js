@@ -1,31 +1,59 @@
 const mongoose = require('mongoose');
 
-const Schema = mongoose.Schema;
-
-const userSchema = new Schema({
-	username: {
-	    type: String,
-	    required: true,
-	    unique: true,
-	    trim:true,
-	    minlength: 3
-	},
-    lastName: {
-        type: String,
-        required: true,
+const InterviewerSchema = new mongoose.Schema(
+  {
+    referredBy: String,
+    giveNoticeOnceInTwoYears: Boolean,
+    lastNoticeGiven: Date,
+    explanation: String,
+    estimatedAnnualIncome: Number,
+    veryLowIncome: Boolean,
+    lowIncome: Boolean,
+    incomeSources: {
+      job: Number,
+      unemployment: Number,
+      dshs: Number,
+      ss: Number,
+      pension: Number,
+      childSupport: Number,
+      childTaxCreditPayments: Number,
+      foodCupons: Number,
+      stateMed: Number,
+      other: Number,
     },
-    firstName: {
-        type: String,
-        required: true,
+    rent: {
+      totalMonthlyRent: Number,
+      section8: Boolean,
+      section8Payments: Number,
+      otherRentAssistanceProgram: Boolean,
+      otherRentAssistanceAmountPaid: Number,
     },
-    middleInitial: {
-        type: String, 
-        required: false,
+    helpReceivedForRent: {
+      received: Boolean,
+      agencies: [
+        {
+          agencyName: String,
+          amount: Number,
+        },
+      ],
     },
-}, {
-	timestamps: true,
-});
+    homeless: {
+      howLong: Number,
+      why: String,
+      recentStays: String,
+    },
+    gasolineVoucher: {
+      driversLicenseNumber: String,
+      reasonForNeed: String,
+    },
+    busTickets: {
+      reasonForNeed: String,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-const interviewer = mongoose.model('interviewers', userSchema);
-
-module.exports = interviewer;
+const InterviewerModel = mongoose.model('interviewers', InterviewerSchema);
+module.exports = InterviewerModel;

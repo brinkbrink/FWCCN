@@ -48,14 +48,14 @@ export default class CreateApplicant extends Component{
     onSubmit(e){
         e.preventDefault();
 
-        const fwccn = {
+        const applicant = {
             applicantName: this.state.applicantName,
             age: this.state.age,
             gender: this.state.gender 
         }
-        console.log(fwccn)
+        console.log(applicant)
 
-        window.location = "/"
+        window.location = "/";
     }
 
     render(){

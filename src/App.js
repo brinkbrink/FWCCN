@@ -11,13 +11,14 @@ import CreateApplicant from "./components/create-applicant.component";
 function App() {
    return( 
     <BrowserRouter>
-     <Navbar />
+        <div className = "container">
+        <Navbar />
         <Routes>      
-       
-            <Route path="/" exact component = {ApplicantList} />
-            <Route path="/edit/:id" component= {UpdateApplicant}/>
-            <Route path= "/create" component={CreateApplicant}/> 
+         <Route path="/" exact component={ApplicantList} />
+         <Route path="/edit/:id" component={UpdateApplicant}/>
+         <Route path= "/create" component={CreateApplicant}/> 
         </Routes>
+        </div>
     </BrowserRouter>
         
     );
