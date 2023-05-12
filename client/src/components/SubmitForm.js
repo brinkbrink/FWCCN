@@ -743,6 +743,8 @@ function SubmitForm() {
           />
         </div>
         </div>
+      ) : null}
+    </div>
         {/* End Children Section */}
 
         {/* Start Other Adults Section */}
