@@ -1186,10 +1186,10 @@ function SubmitForm() {
             </label>
             <select
               className="submit-input"
-              value={landlord.checkName}
+              value={landlord.interviewerCheck}
               required={true}
               onChange={(e) =>
-                setLandlord({ ...landlord, checkName: e.target.value })
+                setLandlord({ ...landlord, interviewerCheck: e.target.value })
               }
             >
               <option value={null}>Select</option>

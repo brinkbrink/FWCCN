@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const ApplicantSchema = new mongoose.Schema({
 
   // start applicant
-  applicationDate: {
+  appDate: {
     type: Date,
   },
   applicantName: {
@@ -27,9 +27,9 @@ const ApplicantSchema = new mongoose.Schema({
     type: String,
   },
   otherLastName: {
-    lastName2: String,
-    lastName3: String,
-    lastName4: String,
+    otherLastName2: String,
+    otherLastName3: String,
+    otherLastName4: String,
   },
   homeless: { 
     type: String 
@@ -73,7 +73,7 @@ const ApplicantSchema = new mongoose.Schema({
     // start adults
    adults: {
     isAdults: String,
-    adultNumber: Number,
+    numberOfAdults: Number,
     adultInformation1: {
       lastName1: String,
       middleName1: String,
