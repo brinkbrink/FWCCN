@@ -12,7 +12,7 @@ function SubmitCategory({ category }) {
   );
 }
 
-function SelectInput({ setter, label, value }) {
+function YesNoSelect({ setter, label, value }) {
   const handleChange = (e) => setter(e.target.value)
   return (
   <div>
@@ -391,40 +391,9 @@ function SubmitForm() {
             />
           </div>{" "}
           {/* End age section */}
-          {/*
-          <label className="submit-label">Disabled (Required):</label>
-          <select
-            className="submit-input"
-            value={ disabled }
-            onChange= {(e) => setDisabled(e.target.value)}
-          >
-            <option value={null}>Select</option>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-          </select>
-                  */}
-          <SelectInput setter={setDisabled} label="Disabled" value={disabled} />
-          <label className="submit-label">Single Male (Required):</label>
-          <select
-            className="submit-input"
-            value={singleMale}
-            onChange={(e) => setSingleMale(e.target.value)}
-          >
-            <option value={null}>Select</option>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-          </select>
-
-          <label className="submit-label">Single Female (Required):</label>
-          <select
-            className="submit-input"
-            value={singleFemale}
-            onChange={(e) => setSingleFemale(e.target.value)}
-          >
-            <option value={null}>Select</option>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-          </select>
+          <YesNoSelect setter={setDisabled} label="Disabled" value={disabled} />
+          <YesNoSelect setter={setSingleMale} label="Single Male (Required):" value={singleMale} />
+          <YesNoSelect setter={setSingleFemale} label="Single Female (Required):" value={singleFemale} />
         </div>
         <div className="form-section">
           <SubmitCategory category={"Contact"} />

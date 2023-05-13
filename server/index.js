@@ -7,7 +7,6 @@ const ApplicantModel = require('./models/Applicants');
 const cors = require('cors');
 app.use(express.json());
 app.use(cors());
-const { validateApplicant } = require('./routes/validation');
 
 
 dotenv.config()
@@ -20,7 +19,7 @@ const uri = `mongodb+srv://${db_username}:${db_password}@${db_url}?retryWrites=t
 mongoose.connect(uri);
 
 // This is the endpoint that will be used to create a new applicant
-app.post("/createApplicants", validateApplicant, async (req,res) => {
+app.post("/createApplicants", async (req,res) => {
     const applicant = req.body;
     const newApplicant = new ApplicantModel(applicant);
     try {
