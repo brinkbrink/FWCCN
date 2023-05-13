@@ -1,6 +1,12 @@
 // This file is used to validate the data that is being sent to the server
 const Joi = require("@hapi/joi");
 
+const addressSchema = Joi.object({
+  street: Joi.string().required(),
+  city: Joi.string().required(),
+  zip: Joi.string().required(),
+});
+
 const childrenSchema = Joi.object({
   boyNumber: Joi.number().required(),
   boyAge: Joi.string().required(),
@@ -64,12 +70,10 @@ const validateApplicant = (req, res, next) => {
     }),
     gender: Joi.string().required(),
     age: Joi.number().required().min(18).max(100),
-    address: Joi.object({
-      street: Joi.string().required(),
-      city: Joi.string()
-        .required()
-        .messages({ "string.pattern.base": "City must be letters only" }),
-      zip: Joi.string().required(),
+    address: Joi.when("homeless", {
+      is: "no",
+      then: addressSchema.required(),
+      otherwise: Joi.optional().allow(""),
     }),
     phone: Joi.string().required().min(10).max(10),
     otherLastName: Joi.object({
@@ -82,7 +86,11 @@ const validateApplicant = (req, res, next) => {
     helpRequest: Joi.object({
       rent: Joi.string().required(),
       gasoline: Joi.string().required(),
-      licensePlate: Joi.when("gasoline", { is: "yes", then: Joi.required(), otherwise: Joi.optional(), }),
+      licensePlate: Joi.when("gasoline", {
+        is: "yes",
+        then: Joi.required(),
+        otherwise: Joi.optional(),
+      }),
       busTicket: Joi.string().required(),
       food: Joi.string().required(),
     }),
@@ -96,11 +104,11 @@ const validateApplicant = (req, res, next) => {
 
     children: Joi.object({
       isChildren: Joi.string().required(),
-      }),
-      children: Joi.when("isChildren", {
-        is: "yes",
-        then: childrenSchema.required(),
-        otherwise: Joi.optional(),
+    }),
+    children: Joi.when("isChildren", {
+      is: "yes",
+      then: childrenSchema.required(),
+      otherwise: Joi.optional(),
     }),
     adults: Joi.object({
       isAdults: Joi.string().required(),
