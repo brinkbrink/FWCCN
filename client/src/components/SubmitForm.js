@@ -2,6 +2,16 @@
 // fetch an endpoint and insert data into the database
 import React, { useState } from "react";
 
+function SubmitCategory({ category }) {
+  return (
+  <label className="submit-category">
+    <h3>
+      <u>{ category }</u>
+    </h3>
+  </label>
+  );
+}
+
 function SubmitForm() {
   const [appDate, setAppDate] = useState("");
   const [applicantName, setApplicantName] = useState({
@@ -234,11 +244,7 @@ function SubmitForm() {
       <form className="submit-form" onSubmit={handleSubmit}>
         {/* Primary Applicant Section */}
         <div className="form-section">
-          <label className="submit-category">
-            <h3>
-              <u>Primary Applicant</u>
-            </h3>
-          </label>
+          <SubmitCategory category="Primary Applicant" />
           <div>
             <label className="submit-label">Application Date (Required):</label>
             <input
@@ -366,8 +372,52 @@ function SubmitForm() {
             />
           </div>{" "}
           {/* End age section */}
+          <label className="submit-label">Disabled (Required):</label>
+          <select
+            className="submit-input"
+            value={disabled}
+            onChange={(e) => setDisabled(e.target.value)}
+          >
+            <option value={null}>Select</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+          <label className="submit-label">Single Male (Required):</label>
+          <select
+            className="submit-input"
+            value={singleMale}
+            onChange={(e) => setSingleMale(e.target.value)}
+          >
+            <option value={null}>Select</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+
+          <label className="submit-label">Single Female (Required):</label>
+          <select
+            className="submit-input"
+            value={singleFemale}
+            onChange={(e) => setSingleFemale(e.target.value)}
+          >
+            <option value={null}>Select</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
         </div>
         <div className="form-section">
+          <SubmitCategory category={"Contact"} />
+          <label className="submit-label">Homeless (Required):</label>
+          <select
+            className="submit-input"
+            value={homeless}
+            onChange={(e) => setHomeless(e.target.value)}
+          >
+            <option value={null}>Select</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+          {homeless === "No" ? (
+            <div>
           <label className="submit-label">Address (Required):</label>
           <input
             className="submit-input"
@@ -394,7 +444,8 @@ function SubmitForm() {
             onChange={(e) => setAddress({ ...address, zip: e.target.value })}
             required={true}
           />
-
+          </div>
+          ) : null}
           <label className="submit-label">Phone (Required):</label>
           <input
             className="submit-input"
@@ -404,35 +455,12 @@ function SubmitForm() {
             required={true}
           />
         </div>
-        {/* TODO: Maybe add the functionality for "Other adults" here so address only pops up if No is selected */}
-        <div className="form-section">
-          <label className="submit-label">Homeless (Required):</label>
-          <select
-            className="submit-input"
-            value={homeless}
-            onChange={(e) => setHomeless(e.target.value)}
-          >
-            <option value={null}>Select</option>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-          </select>
 
-          <label className="submit-label">Disabled (Required):</label>
-          <select
-            className="submit-input"
-            value={disabled}
-            onChange={(e) => setDisabled(e.target.value)}
-          >
-            <option value={null}>Select</option>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-          </select>
-        </div>
         {/* End Primary Applicant Section */}
 
         {/* Start Help Request Section */}
         <div className="form-section">
-          <p>Help Request:</p>
+          <SubmitCategory category={"Help Request"} />
           <label className="submit-label">Rent (Required):</label>
           <select
             className="submit-input"
@@ -498,7 +526,7 @@ function SubmitForm() {
         </div>
         {/* ID Source Section */}
         <div className="form-section">
-          <p>ID Source:</p>
+          <SubmitCategory category={"ID Source"} />
           <label className="submit-label">Driver's License (Required):</label>
           <input
             className="submit-input"
@@ -533,39 +561,13 @@ function SubmitForm() {
             }}
           />
         </div>
-        <div className="form-section">
-          <label className="submit-label">Single Male (Required):</label>
-          <select
-            className="submit-input"
-            value={singleMale}
-            onChange={(e) => setSingleMale(e.target.value)}
-          >
-            <option value={null}>Select</option>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-          </select>
-
-          <label className="submit-label">Single Female (Required):</label>
-          <select
-            className="submit-input"
-            value={singleFemale}
-            onChange={(e) => setSingleFemale(e.target.value)}
-          >
-            <option value={null}>Select</option>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-          </select>
-        </div>
+        
         {/* End Applicant Section */}
 
         {/* Start Children Section */}
         <div className="form-section">
           <div>
-            <label className="submit-category">
-              <h3>
-                <u>Children:</u>
-              </h3>
-            </label>
+          <SubmitCategory category="Children" />
             <label className="submit-label">
               Do you have children, under the age of 18, permanently living with
               you? (Required)
@@ -582,7 +584,7 @@ function SubmitForm() {
               <option value="Yes">Yes</option>
               <option value="No">No</option>
             </select>
-          </div>
+        </div>
           {children.isChildren === "Yes" ? (
             <div>
               <div>
@@ -679,11 +681,7 @@ function SubmitForm() {
         {/* Start Other Adults Section */}
         <div className="form-section">
           <div>
-            <label className="submit-category">
-              <h3>
-                <u>Other Adults:</u>
-              </h3>
-            </label>
+          <SubmitCategory category="Other Adults" />
             <label className="submit-label">
               Do you have other adults (18 and over) living in the home?
               (Required)
@@ -1161,13 +1159,7 @@ function SubmitForm() {
 
         {/* Start Apartment / Landlord Section */}
         <div className="form-section">
-          <div>
-            <label className="submit-category">
-              <h3>
-                <u>Apartment/Landlord</u>
-              </h3>
-            </label>
-          </div>
+          <SubmitCategory category="Apartment/Landlord" />
           <div>
             <label className="submit-label">
               Apartment/Landlord Name (Required):
@@ -1244,13 +1236,7 @@ function SubmitForm() {
 
         {/* Start Income Section */}
         <div className="form-section">
-          <div>
-            <label className="submit-category">
-              <h3>
-                <u>Income</u>
-              </h3>
-            </label>
-          </div>
+          <SubmitCategory category="Income" />
           <div>
             <label className="submit-label">Total Income (Required):</label>
             <input
@@ -1310,13 +1296,7 @@ function SubmitForm() {
 
         {/* Start Demographics Section */}
         <div className="form-section">
-          <div>
-            <label className="submit-category">
-              <h3>
-                <u>Demographics</u>
-              </h3>
-            </label>
-          </div>
+          <SubmitCategory category="Demographics" />
           Please put the number of people next to the appropriate category. The
           total of all numbers should equal the number of people living in the
           household (Required)
