@@ -2,6 +2,16 @@
 // fetch an endpoint and insert data into the database
 import React, { useState } from "react";
 
+function SubmitCategory({ category }) {
+  return (
+  <label className="submit-category">
+    <h3>
+      <u>{ category }</u>
+    </h3>
+  </label>
+  );
+}
+
 function SubmitForm() {
   const [appDate, setAppDate] = useState("");
   const [applicantName, setApplicantName] = useState({
@@ -234,11 +244,7 @@ function SubmitForm() {
       <form className="submit-form" onSubmit={handleSubmit}>
         {/* Primary Applicant Section */}
         <div className="form-section">
-          <label className="submit-category">
-            <h3>
-              <u>Primary Applicant</u>
-            </h3>
-          </label>
+          <SubmitCategory category="Primary Applicant" />
           <div>
             <label className="submit-label">Application Date (Required):</label>
             <input
@@ -561,11 +567,7 @@ function SubmitForm() {
         {/* Start Children Section */}
         <div className="form-section">
           <div>
-            <label className="submit-category">
-              <h3>
-                <u>Children:</u>
-              </h3>
-            </label>
+          <SubmitCategory category="Children:" />
             <label className="submit-label">
               Do you have children, under the age of 18, permanently living with
               you? (Required)
@@ -679,11 +681,7 @@ function SubmitForm() {
         {/* Start Other Adults Section */}
         <div className="form-section">
           <div>
-            <label className="submit-category">
-              <h3>
-                <u>Other Adults:</u>
-              </h3>
-            </label>
+          <SubmitCategory category="Other Adults:" />
             <label className="submit-label">
               Do you have other adults (18 and over) living in the home?
               (Required)
@@ -1161,13 +1159,7 @@ function SubmitForm() {
 
         {/* Start Apartment / Landlord Section */}
         <div className="form-section">
-          <div>
-            <label className="submit-category">
-              <h3>
-                <u>Apartment/Landlord</u>
-              </h3>
-            </label>
-          </div>
+          <SubmitCategory category="Apartment/Landlord" />
           <div>
             <label className="submit-label">
               Apartment/Landlord Name (Required):
@@ -1244,13 +1236,7 @@ function SubmitForm() {
 
         {/* Start Income Section */}
         <div className="form-section">
-          <div>
-            <label className="submit-category">
-              <h3>
-                <u>Income</u>
-              </h3>
-            </label>
-          </div>
+          <SubmitCategory category="Income" />
           <div>
             <label className="submit-label">Total Income (Required):</label>
             <input
@@ -1310,13 +1296,7 @@ function SubmitForm() {
 
         {/* Start Demographics Section */}
         <div className="form-section">
-          <div>
-            <label className="submit-category">
-              <h3>
-                <u>Demographics</u>
-              </h3>
-            </label>
-          </div>
+          <SubmitCategory category="Demographics" />
           Please put the number of people next to the appropriate category. The
           total of all numbers should equal the number of people living in the
           household (Required)
