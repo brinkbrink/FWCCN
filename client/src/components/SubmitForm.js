@@ -12,6 +12,25 @@ function SubmitCategory({ category }) {
   );
 }
 
+function SelectInput({ setter, label, value }) {
+  const handleChange = (e) => setter(e.target.value)
+  return (
+  <div>
+      <label className="submit-label">{ label }</label>
+          <select
+            className="submit-input"
+            value={ value }
+            onChange={ handleChange }
+          >
+            <option value={null}>Select</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+  </div>
+  );
+}
+
+
 function SubmitForm() {
   const [appDate, setAppDate] = useState("");
   const [applicantName, setApplicantName] = useState({
@@ -372,16 +391,19 @@ function SubmitForm() {
             />
           </div>{" "}
           {/* End age section */}
+          {/*
           <label className="submit-label">Disabled (Required):</label>
           <select
             className="submit-input"
-            value={disabled}
-            onChange={(e) => setDisabled(e.target.value)}
+            value={ disabled }
+            onChange= {(e) => setDisabled(e.target.value)}
           >
             <option value={null}>Select</option>
             <option value="Yes">Yes</option>
             <option value="No">No</option>
           </select>
+                  */}
+          <SelectInput setter={setDisabled} label="Disabled" value={disabled} />
           <label className="submit-label">Single Male (Required):</label>
           <select
             className="submit-input"
@@ -1425,5 +1447,7 @@ function SubmitForm() {
     </div>
   );
 }
+
+
 
 export default SubmitForm;
