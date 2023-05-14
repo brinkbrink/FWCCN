@@ -122,8 +122,8 @@ const ApplicantSchema = new mongoose.Schema({
 
     // start income
     income: {
-      totalIncome: String, 
-      monthlyIncome: String,
+      totalIncome: Number, 
+      monthlyIncome: Number,
       numberMembers: Number,
     },
     // end income

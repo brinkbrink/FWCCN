@@ -55,7 +55,6 @@ const adultInformationSchema4 = Joi.object({
 
 const validateApplicant = (req, res, next) => {
   const schema = Joi.object({
-    // date of application is required and must be a date type mm/dd/yyyy
     appDate: Joi.date(),
     applicantName: Joi.object({
       firstName: Joi.string()
@@ -151,8 +150,8 @@ const validateApplicant = (req, res, next) => {
     }),
 
     income: Joi.object({
-      totalIncome: Joi.required(),
-      monthlyIncome: Joi.required(),
+      totalIncome: Joi.number().required().min(0).max(1000000000),
+      monthlyIncome: Joi.number().required(),
       numberMembers: Joi.number().required(),
     }),
     demographics: Joi.object({
