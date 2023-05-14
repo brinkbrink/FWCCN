@@ -486,16 +486,19 @@ function SubmitForm() {
             <option value="Yes">Yes</option>
             <option value="No">No</option>
           </select>
-          <label className="submit-label">License Plate # (Optional):</label>
-          {/* TODO: Create logic to only have license plate # pop up if yes is selected??*/}
-          <input
-            className="submit-input"
-            type="text"
-            value={helpRequest.licensePlate}
-            onChange={(e) =>
-              setHelpRequest({ ...helpRequest, licensePlate: e.target.value })
-            }
-          />
+          {helpRequest.gasoline === "Yes" ? (
+            <div>
+            <label className="submit-label">License Plate # (Required):</label>
+            <input
+              className="submit-input"
+              type="text"
+              value={helpRequest.licensePlate}
+              onChange={(e) =>
+                setHelpRequest({ ...helpRequest, licensePlate: e.target.value })
+              }
+            />
+            </div>
+             ) : null }
 
           <label className="submit-label">Bus Ticket (Required):</label>
           <select
@@ -1178,10 +1181,10 @@ function SubmitForm() {
             </label>
             <select
               className="submit-input"
-              value={landlord.checkName}
+              value={landlord.interviewerCheck}
               required={true}
               onChange={(e) =>
-                setLandlord({ ...landlord, checkName: e.target.value })
+                setLandlord({ ...landlord, interviewerCheck: e.target.value })
               }
             >
               <option value={null}>Select</option>

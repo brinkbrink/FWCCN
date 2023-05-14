@@ -21,12 +21,15 @@ mongoose.connect(uri);
 
 // This is the endpoint that will be used to create a new applicant
 app.post("/createApplicants", validateApplicant, async (req,res) => {
-    const applicant = req.body;
-    const newApplicant = new ApplicantModel(applicant);
     try {
-        await newApplicant.save();
-        res.send("insert data successfully");
-    } catch (error) {
+        const applicant = new ApplicantModel(req.body);
+        const result = await applicant.save();
+        res.type('json');
+        res.status(200);
+        res.json({applicant: result});
+        console.log("Applicant created successfully");
+    }
+    catch (error) {
         console.log(error)
     }
 });
