@@ -150,7 +150,7 @@ const validateApplicant = (req, res, next) => {
     }),
 
     income: Joi.object({
-      totalIncome: Joi.number().required().min(0).max(1000000000),
+      totalIncome: Joi.number().required(),
       monthlyIncome: Joi.number().required(),
       numberMembers: Joi.number().required(),
     }),
