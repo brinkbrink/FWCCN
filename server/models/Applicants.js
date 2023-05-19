@@ -44,6 +44,7 @@ const ApplicantSchema = new mongoose.Schema(
       required: true,
     },
     otherLastNames: [String],
+    //help section
     isHomeless: {
       type: Boolean,
       required: true,

@@ -1,6 +1,7 @@
 const router = require('express').Router(); //need express router
 const ApplicantModel = require('../models/Applicants');
 let Applicants = require('../models/Applicants'); //require the applicant which also uses mongoose
+const validationController = require('../controllers/validations'); //use validations check
 
 
 router.route('/').get((req, res) => { //first route, handle incoming GET REQUEST
@@ -9,21 +10,81 @@ router.route('/').get((req, res) => { //first route, handle incoming GET REQUEST
 		.catch(err => res.status(400).json('Error:' + err)); //return error 
 });
 
-router.route('/add').post((req,res)=>{ //second route, handles incoming http post request
-	const lastName = req.body.lastName; //the applicant's name is part of the request body
-    const middleInitial = req.body.middleInitial;
-    const firstName= req.body.firstName;
-   
-
-	const newApplicant = new ApplicantModel({
+router.route('/add').post(validationController.validateInput, (req, res)=>{ //second route, handles incoming http post request
+	const {
         lastName,
         middleInitial,
-        firstName
-    }); //create a new instant of applicant using their name
-
+        firstName,
+        gender,
+        age,
+        streetAddress,
+        city,
+        zip,
+        phone,
+        otherLastNames,
+        isHomeless,
+        isDisabled,
+        helpRequested,
+        idSource,
+        isSingleMaleHead,
+        isSingleFemaleHead,
+        hasChildren,
+        numberOfBoys,
+        agesOfBoys,
+        numberOfGirls,
+        agesOfGirls,
+        relationshipToChildren,
+        childrenSchoolDistrict,
+        schoolNames,
+        hasOtherAdults,
+        otherAdults,
+        name,
+        interviewerCheckName,
+        interviewerAddress,
+        interviewerPhone,
+        monthlyIncomeLast12Months,
+        numberOfHouseholdMembers,
+        race,
+      } = req.body;
+    
+      const newApplicant = new ApplicantModel({
+        lastName,
+        middleInitial,
+        firstName,
+        gender,
+        age,
+        streetAddress,
+        city,
+        zip,
+        phone,
+        otherLastNames,
+        isHomeless,
+        isDisabled,
+        helpRequested,
+        idSource,
+        isSingleMaleHead,
+        isSingleFemaleHead,
+        hasChildren,
+        numberOfBoys,
+        agesOfBoys,
+        numberOfGirls,
+        agesOfGirls,
+        relationshipToChildren,
+        childrenSchoolDistrict,
+        schoolNames,
+        hasOtherAdults,
+        otherAdults,
+        name,
+        interviewerCheckName,
+        interviewerAddress,
+        interviewerPhone,
+        monthlyIncomeLast12Months,
+        numberOfHouseholdMembers,
+        race,
+      });
 	newApplicant.save() //new user saved to the databse with the save method
 		.then(() => res.json('Applicant added!')) //return user added
-		.catch(err => res.status(400).josn('Error: ' + err)); //or else return error    
+		.catch(err => res.status(400).json('Error: ' + err)); //or else return error    
 });
 
 router.route('/:id').get((req,res) => { //get request from database
