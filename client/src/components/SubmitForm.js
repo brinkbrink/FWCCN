@@ -12,6 +12,25 @@ function SubmitCategory({ category }) {
   );
 }
 
+function YesNoSelect({ setter, label, value }) {
+  const handleChange = (e) => setter(e.target.value)
+  return (
+  <div>
+      <label className="submit-label">{ label }</label>
+          <select
+            className="submit-input"
+            value={ value }
+            onChange={ handleChange }
+          >
+            <option value={null}>Select</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+  </div>
+  );
+}
+
+
 function SubmitForm() {
   const [appDate, setAppDate] = useState("");
   const [applicantName, setApplicantName] = useState({
@@ -372,37 +391,9 @@ function SubmitForm() {
             />
           </div>{" "}
           {/* End age section */}
-          <label className="submit-label">Disabled (Required):</label>
-          <select
-            className="submit-input"
-            value={disabled}
-            onChange={(e) => setDisabled(e.target.value)}
-          >
-            <option value={null}>Select</option>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-          </select>
-          <label className="submit-label">Single Male (Required):</label>
-          <select
-            className="submit-input"
-            value={singleMale}
-            onChange={(e) => setSingleMale(e.target.value)}
-          >
-            <option value={null}>Select</option>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-          </select>
-
-          <label className="submit-label">Single Female (Required):</label>
-          <select
-            className="submit-input"
-            value={singleFemale}
-            onChange={(e) => setSingleFemale(e.target.value)}
-          >
-            <option value={null}>Select</option>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-          </select>
+          <YesNoSelect setter={setDisabled} label="Disabled" value={disabled} />
+          <YesNoSelect setter={setSingleMale} label="Single Male (Required):" value={singleMale} />
+          <YesNoSelect setter={setSingleFemale} label="Single Female (Required):" value={singleFemale} />
         </div>
         <div className="form-section">
           <SubmitCategory category={"Contact"} />
@@ -1428,5 +1419,7 @@ function SubmitForm() {
     </div>
   );
 }
+
+
 
 export default SubmitForm;
