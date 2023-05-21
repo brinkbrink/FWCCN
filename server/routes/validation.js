@@ -1,6 +1,12 @@
 // This file is used to validate the data that is being sent to the server
 const Joi = require("@hapi/joi");
 
+const addressSchema = Joi.object({
+  street: Joi.string().required(),
+  city: Joi.string().required(),
+  zip: Joi.string().required(),
+});
+
 const childrenSchema = Joi.object({
   boyNumber: Joi.number().required(),
   boyAge: Joi.string().required(),
@@ -49,7 +55,7 @@ const adultInformationSchema4 = Joi.object({
 
 const validateApplicant = (req, res, next) => {
   const schema = Joi.object({
-    applicationDate: Joi.date().required(),
+    appDate: Joi.date(),
     applicantName: Joi.object({
       firstName: Joi.string()
         .required()
@@ -63,25 +69,27 @@ const validateApplicant = (req, res, next) => {
     }),
     gender: Joi.string().required(),
     age: Joi.number().required().min(18).max(100),
-    address: Joi.object({
-      street: Joi.string().required(),
-      city: Joi.string()
-        .required()
-        .messages({ "string.pattern.base": "City must be letters only" }),
-      zip: Joi.string().required(),
+    address: Joi.when("homeless", {
+      is: "no",
+      then: addressSchema.required(),
+      otherwise: Joi.optional().allow(""),
     }),
     phone: Joi.string().required().min(10).max(10),
     otherLastName: Joi.object({
-      lastName2: Joi.string().optional().allow(""),
-      lastName3: Joi.string().optional().allow(""),
-      lastName4: Joi.string().optional().allow(""),
+      otherLastName2: Joi.string().optional().allow(""),
+      otherLastName3: Joi.string().optional().allow(""),
+      otherLastName4: Joi.string().optional().allow(""),
     }),
     homeless: Joi.string().required(),
     disabled: Joi.string().required(),
     helpRequest: Joi.object({
       rent: Joi.string().required(),
       gasoline: Joi.string().required(),
-      licensePlate: Joi.string(),
+      licensePlate: Joi.when("gasoline", {
+        is: "yes",
+        then: Joi.required(),
+        otherwise: Joi.optional(),
+      }),
       busTicket: Joi.string().required(),
       food: Joi.string().required(),
     }),
@@ -95,17 +103,17 @@ const validateApplicant = (req, res, next) => {
 
     children: Joi.object({
       isChildren: Joi.string().required(),
-      }),
-      children: Joi.when("isChildren", {
-        is: "yes",
-        then: childrenSchema.required(),
-        otherwise: Joi.optional(),
+    }),
+    children: Joi.when("isChildren", {
+      is: "yes",
+      then: childrenSchema.required(),
+      otherwise: Joi.optional(),
     }),
     adults: Joi.object({
       isAdults: Joi.string().required(),
-      adultNumber: Joi.number().when("isAdult", {
+      numberOfAdults: Joi.when("isAdult", {
         is: "yes",
-        then: Joi.required(),
+        then: Joi.number().required(),
         otherwise: Joi.optional(),
       }),
       adultInformation1: Joi.when("isAdult", {
@@ -142,8 +150,8 @@ const validateApplicant = (req, res, next) => {
     }),
 
     income: Joi.object({
-      totalIncome: Joi.string().required(),
-      monthlyIncome: Joi.string().required(),
+      totalIncome: Joi.number().required(),
+      monthlyIncome: Joi.number().required(),
       numberMembers: Joi.number().required(),
     }),
     demographics: Joi.object({
