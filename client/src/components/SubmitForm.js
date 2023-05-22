@@ -310,7 +310,6 @@ function SubmitForm() {
         {/* Primary Applicant Section */}
         <div className="form-section">
           <SubmitCategory category="Primary Applicant" />
-          <div>
             <label className="submit-label">Application Date (Required):</label>
             <input
               className="submit-input"
@@ -318,57 +317,44 @@ function SubmitForm() {
               value={appDate}
               onChange={(e) => setAppDate(e.target.value)}
             />
-          </div>
-
           <TextInput 
           label="Last Name (Required):" 
           val={applicantName.lastName} req={ true }
-          handleChange={(e) => setApplicantName({ ...applicantName, lastName: e.target.value })} />
-
+          handleChange={(e) => setApplicantName({ ...applicantName, lastName: e.target.value })} 
+          />
           <TextInput 
           label="Middle Name (Optional):" 
           val={applicantName.middleName} req={ false }
-          handleChange={(e) => setApplicantName({ ...applicantName, middleName: e.target.value })} />
-
+          handleChange={(e) => setApplicantName({ ...applicantName, middleName: e.target.value })} 
+          />
           <TextInput 
           label="First Name (Required):" 
           val={applicantName.firstName} req={ true }
-          handleChange={(e) => setApplicantName({ ...applicantName, firstName: e.target.value })} />
-
+          handleChange={(e) => setApplicantName({ ...applicantName, firstName: e.target.value })} 
+          />
           <div>
-            <label className="submit-label">
-              Do you have other last names used? (Required)
-            </label>
-            <select
-              className="submit-input"
-              value={otherLastName.isOtherLastName}
-              onChange={(e) =>
-                setOtherLastName({
-                  ...otherLastName,
-                  isOtherLastName: e.target.value,
-                })
-              }
-            >
-              <option value={null}>Select</option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
+            <YesNoSelect label="Do you have other last names used? (Required)"
+            val={ otherLastName.isOtherLastName } 
+            handleChange={(e) => setOtherLastName({
+                ...otherLastName, isOtherLastName: e.target.value,})}
+            />
             {otherLastName.isOtherLastName === "Yes" ? (
               <div>
                 <TextInput 
                 label="Last Name 1 (Optional):" 
                 val={ otherLastName.otherLastName2 } req={ false }
-                handleChange={(e) => setOtherLastName({ ...otherLastName, otherLastName2: e.target.value })} />
-
+                handleChange={(e) => setOtherLastName({ ...otherLastName, otherLastName2: e.target.value })} 
+                />
                 <TextInput 
                 label="Last Name 2 (Optional):" 
                 val={ otherLastName.otherLastName3 } req={ false }
-                handleChange={(e) => setOtherLastName({ ...otherLastName, otherLastName3: e.target.value })} />
-
+                handleChange={(e) => setOtherLastName({ ...otherLastName, otherLastName3: e.target.value })} 
+                />
                 <TextInput 
                 label="Last Name 3 (Optional):" 
                 val={ otherLastName.otherLastName4 } req={ false }
-                handleChange={(e) => setOtherLastName({ ...otherLastName, otherLastName4: e.target.value })} />
+                handleChange={(e) => setOtherLastName({ ...otherLastName, otherLastName4: e.target.value })} 
+                />
               </div>
             ) : null}
           </div>
@@ -449,13 +435,11 @@ function SubmitForm() {
         {/* ID Source Section */}
         <div className="form-section">
           <SubmitCategory category={"ID Source"} />
-
           <TextInput 
           label="Driver's License (Required):" 
           val={ IdSource.license } req={ true }
           handleChange={(e) => setIdSource({ ...IdSource, license: e.target.value })}
           />
-
           <label className="submit-label">Expiration Date (Required):</label>
           <input
             className="submit-input"
@@ -465,7 +449,6 @@ function SubmitForm() {
               setIdSource({ ...IdSource, expDate: e.target.value })
             }
           />
-
           <label className="submit-label">
             Social Security: (Last 4 digits) (Required)
           </label>
@@ -480,7 +463,6 @@ function SubmitForm() {
             }}
           />
         </div>
-        
         {/* End Applicant Section */}
 
         {/* Start Children Section */}
@@ -495,7 +477,8 @@ function SubmitForm() {
               <div>
                 <NumInput label="How many boys? (Required):" 
                   val={children.boyNumber} req={true} 
-                  handleChange={(e) => setChildren({ ...children, boyNumber: e.target.value })} />
+                  handleChange={(e) => setChildren({ ...children, boyNumber: e.target.value })} 
+                  />
                 {/* 
                 TODO: return age inputs for num of children parseInt(children.boyNumber) 
                 ..also apply this logic to other adults section
@@ -503,30 +486,35 @@ function SubmitForm() {
                 */}
                   <NumInput label="Age (Required):" 
                   val={children.boyAge} req={true} 
-                  handleChange={(e) => setChildren({ ...children, boyAge: e.target.value })} />
+                  handleChange={(e) => setChildren({ ...children, boyAge: e.target.value })} 
+                  />
               </div>
               <div>
                   <NumInput label="How many girls? (Required):" 
                   val={children.girlNumber} req={true} 
-                  handleChange={(e) => setChildren({ ...children, girlNumber: e.target.value })} />
+                  handleChange={(e) => setChildren({ ...children, girlNumber: e.target.value })} 
+                  />
                   <NumInput label="Age (Required):" 
                   val={children.girlAge} req={true} 
-                  handleChange={(e) => setChildren({ ...children, girlAge: e.target.value })} />
+                  handleChange={(e) => setChildren({ ...children, girlAge: e.target.value })} 
+                  />
               </div>
 
               <TextInput 
               label="What is your relationship to the children? (Required):" 
               val={ children.childrenRel } req={ true }
-              handleChange={(e) => setChildren({ ...children, childrenRel: e.target.value })} />
+              handleChange={(e) => setChildren({ ...children, childrenRel: e.target.value })} 
+              />
               <TextInput 
               label="Children's School District (Required):" 
               val={ children.schoolDistrict } req={ true }
-              handleChange={(e) => setChildren({ ...children, schoolDistrict: e.target.value })} />
+              handleChange={(e) => setChildren({ ...children, schoolDistrict: e.target.value })} 
+              />
               <TextInput 
               label="Children's School Name (Required):" 
               val={ children.schoolName } req={ true }
-              handleChange={(e) => setChildren({ ...children, schoolName: e.target.value })} />
-
+              handleChange={(e) => setChildren({ ...children, schoolName: e.target.value })} 
+              />
             </div>
           ) : null}
         </div>
@@ -563,7 +551,6 @@ function SubmitForm() {
               <div>
                 {/* TODO: style h4 */}
                 <h4>Other Adult 1</h4>
-
                 <TextInput label="Last Name (Required):"
                 val={adults.adultInformation1.lastName1} req={true}
                 handleChange={(e) =>
@@ -651,7 +638,6 @@ function SubmitForm() {
                       },
                     })}
                 />
-
                   <NumInput label="Age (Required):"
                   val={adults.adultInformation2.adultAge2} req={true}
                   handleChange={(e) =>
