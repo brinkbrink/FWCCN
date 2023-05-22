@@ -995,21 +995,10 @@ function SubmitForm() {
                 })
               }
             />
-            <div>
-              <label className="submit-label">
-                Number of members supported by this income (Required):
-              </label>
-              <input
-                className="submit-input"
-                type="number"
-                value={income.numberMembers}
-                required={true}
-                min={1}
-                onChange={(e) =>
-                  setIncome({ ...income, numberMembers: e.target.value })
-                }
-              />
-            </div>
+            <NumInput label="Number of members supported by this income (Required):"
+            val={ income.numberMembers } req={ true }
+            handleChange={(e) => setIncome({ ...income, numberMembers: e.target.value })}
+            />
           </div>
         </div>
         {/* End Income Section */}
