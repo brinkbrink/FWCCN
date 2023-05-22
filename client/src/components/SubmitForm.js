@@ -12,14 +12,13 @@ function SubmitCategory({ category }) {
   );
 }
 
-function YesNoSelect({ setter, label, value }) {
-  const handleChange = (e) => setter(e.target.value)
+function YesNoSelect({ label, val, handleChange }) {
   return (
   <div>
       <label className="submit-label">{ label }</label>
           <select
             className="submit-input"
-            value={ value }
+            value={ val }
             onChange={ handleChange }
           >
             <option value={null}>Select</option>
@@ -390,22 +389,13 @@ function SubmitForm() {
             />
           </div>{" "}
           {/* End age section */}
-          <YesNoSelect setter={setDisabled} label="Disabled" value={disabled} />
-          <YesNoSelect setter={setSingleMale} label="Single Male (Required):" value={singleMale} />
-          <YesNoSelect setter={setSingleFemale} label="Single Female (Required):" value={singleFemale} />
+          <YesNoSelect label="Disabled (Required):" val={ disabled } handleChange={(e) => setDisabled(e.target.value)} />
+          <YesNoSelect label="Single Male (Required):" val={ singleMale } handleChange={(e) => setSingleMale(e.target.value)} />
+          <YesNoSelect label="Single Female (Required):" val={ singleFemale } handleChange={(e) => setSingleFemale(e.target.value)} />
         </div>
         <div className="form-section">
           <SubmitCategory category={"Contact"} />
-          <label className="submit-label">Homeless (Required):</label>
-          <select
-            className="submit-input"
-            value={homeless}
-            onChange={(e) => setHomeless(e.target.value)}
-          >
-            <option value={null}>Select</option>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-          </select>
+          <YesNoSelect label="Homeless (Required):" val={ homeless } handleChange={(e) => setHomeless(e.target.value)}/>
           {homeless === "No" ? (
           <div>
             <TextInput 
@@ -413,13 +403,11 @@ function SubmitForm() {
             val={ address.street } req={ true }
             handleChange={(e) => setAddress({ ...address, street: e.target.value })}
             />
-
             <TextInput 
             label="City (Required):" 
             val={ address.city } req={ true }
             handleChange={(e) => setAddress({ ...address, city: e.target.value })}
             />
-
             <TextInput 
             label="Zip (Required):" 
             val={ address.zip } req={ true }
@@ -427,7 +415,6 @@ function SubmitForm() {
             />
           </div>
           ) : null}
-
           <TextInput 
           label="Phone (Required):" 
           val={ phone } req={ true }
@@ -439,71 +426,25 @@ function SubmitForm() {
         {/* Start Help Request Section */}
         <div className="form-section">
           <SubmitCategory category={"Help Request"} />
-          <label className="submit-label">Rent (Required):</label>
-          <select
-            className="submit-input"
-            value={helpRequest.rent}
-            onChange={(e) =>
-              setHelpRequest({ ...helpRequest, rent: e.target.value })
-            }
-          >
-            <option value={null}>Select</option>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-          </select>
-
-          <label className="submit-label">Gasoline (Required):</label>
-          <select
-            className="submit-input"
-            value={helpRequest.gasoline}
-            onChange={(e) =>
-              setHelpRequest({ ...helpRequest, gasoline: e.target.value })
-            }
-          >
-            <option value={null}>Select</option>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-          </select>
+          <YesNoSelect label="Rent (Required):" val={ helpRequest.rent }
+          handleChange={ (e) => setHelpRequest({ ...helpRequest, rent: e.target.value }) }
+          />
+          <YesNoSelect label="Gasoline (Required):" val={ helpRequest.gasoline }
+          handleChange={ (e) => setHelpRequest({ ...helpRequest, gasoline: e.target.value }) }
+          />
           {helpRequest.gasoline === "Yes" ? (
             <div>
-            <label className="submit-label">License Plate # (Required):</label>
-            <input
-              className="submit-input"
-              type="text"
-              value={helpRequest.licensePlate}
-              onChange={(e) =>
-                setHelpRequest({ ...helpRequest, licensePlate: e.target.value })
-              }
-            />
+              <TextInput label="License Plate # (Required):" val={ helpRequest.licensePlate } req={ true }
+              handleChange={(e) => setHelpRequest({ ...helpRequest, licensePlate: e.target.value })}
+              />
             </div>
              ) : null }
-
-          <label className="submit-label">Bus Ticket (Required):</label>
-          <select
-            className="submit-input"
-            type="text"
-            value={helpRequest.busTicket}
-            onChange={(e) =>
-              setHelpRequest({ ...helpRequest, busTicket: e.target.value })
-            }
-          >
-            <option value={null}>Select</option>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-          </select>
-
-          <label className="submit-label">Food (Required):</label>
-          <select
-            className="submit-input"
-            value={helpRequest.food}
-            onChange={(e) =>
-              setHelpRequest({ ...helpRequest, food: e.target.value })
-            }
-          >
-            <option value={null}>Select</option>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-          </select>
+          <YesNoSelect label="Bus Ticket (Required):" val={ helpRequest.busTicket }
+          handleChange={ (e) => setHelpRequest({ ...helpRequest, busTicket: e.target.value }) }
+          />
+          <YesNoSelect label="Food (Required):" val={ helpRequest.food }
+          handleChange={ (e) => setHelpRequest({ ...helpRequest, food: e.target.value }) }
+          />
         </div>
         {/* ID Source Section */}
         <div className="form-section">
@@ -544,32 +485,22 @@ function SubmitForm() {
 
         {/* Start Children Section */}
         <div className="form-section">
-          <div>
           <SubmitCategory category="Children" />
-            <label className="submit-label">
-              Do you have children, under the age of 18, permanently living with
-              you? (Required)
-            </label>
-            <select
-              className="submit-input"
-              value={children.isChildren}
-              required={true}
-              onChange={(e) =>
-                setChildren({ ...children, isChildren: e.target.value })
-              }
-            >
-              <option value={null}>Select</option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
-        </div>
+          <YesNoSelect label="Do you have children, under the age of 18, permanently living with you? (Required)" 
+          value={ children.isChildren } req={ true }
+          handleChange={(e) => setChildren({ ...children, isChildren: e.target.value })}
+          />
           {children.isChildren === "Yes" ? (
             <div>
               <div>
                 <NumInput label="How many boys? (Required):" 
                   val={children.boyNumber} req={true} 
                   handleChange={(e) => setChildren({ ...children, boyNumber: e.target.value })} />
-                {/* TODO: return age inputs for num of children parseInt(children.boyNumber) ..apply this logic to other adults section*/}
+                {/* 
+                TODO: return age inputs for num of children parseInt(children.boyNumber) 
+                ..also apply this logic to other adults section
+                and use components to do this.
+                */}
                   <NumInput label="Age (Required):" 
                   val={children.boyAge} req={true} 
                   handleChange={(e) => setChildren({ ...children, boyAge: e.target.value })} />
@@ -603,25 +534,11 @@ function SubmitForm() {
 
         {/* Start Other Adults Section */}
         <div className="form-section">
-          <div>
           <SubmitCategory category="Other Adults" />
-            <label className="submit-label">
-              Do you have other adults (18 and over) living in the home?
-              (Required)
-            </label>
-            <select
-              className="submit-input"
-              value={adults.isAdults}
-              required={true}
-              onChange={(e) =>
-                setAdults({ ...adults, isAdults: e.target.value })
-              }
-            >
-              <option value={null}>Select</option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
-          </div>
+          <YesNoSelect label="Do you have other adults (18 and over) living in the home? (Required)" 
+          val={ adults.isAdults } req={ true }
+          handleChange={(e) => setAdults({ ...adults, isAdults: e.target.value })}
+          />
           {adults.isAdults === "Yes" ? (
             <div>
               <div>
@@ -868,22 +785,10 @@ function SubmitForm() {
           val={ landlord.landlordName } req={ true }
           handleChange={(e) => setLandlord({ ...landlord, landlordName: e.target.value })}
           />
-            <label className="submit-label">
-              Interviewer Check Name (Required):
-            </label>
-            <select
-              className="submit-input"
-              value={landlord.interviewerCheck}
-              required={true}
-              onChange={(e) =>
-                setLandlord({ ...landlord, interviewerCheck: e.target.value })
-              }
-            >
-              <option value={null}>Select</option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
-
+          <YesNoSelect label="Interviewer Check Name (Required):"
+          val={ landlord.interviewerCheck } req={ true }
+          handleChange={(e) => setLandlord({ ...landlord, interviewerCheck: e.target.value })}
+          />
           <TextInput label="Street Address (Required):" 
           val={ landlord.street } req={ true }
           handleChange={(e) => setLandlord({ ...landlord, street: e.target.value })}
@@ -1081,7 +986,6 @@ function SubmitForm() {
     </div>
   );
 }
-
 
 
 export default SubmitForm;
