@@ -1,6 +1,8 @@
 // this is a submit form
 // fetch an endpoint and insert data into the database
 import React, { useState } from "react";
+//import  validationSchema  from './validation';
+
 
 function SubmitCategory({ category }) {
   return (
@@ -11,6 +13,7 @@ function SubmitCategory({ category }) {
   </label>
   );
 }
+
 
 function SubmitForm() {
   const [appDate, setAppDate] = useState("");
@@ -120,6 +123,7 @@ function SubmitForm() {
     alert(
       `Submitting Name ${applicantName.firstName} ${applicantName.middleName} ${applicantName.lastName}`
     );
+
     fetch("http://localhost:3001/createApplicants", {
       method: "POST",
       headers: {
