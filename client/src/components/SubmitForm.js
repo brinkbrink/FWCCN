@@ -61,6 +61,23 @@ function NumInput ({ label, val, handleChange, req }) {
   )
 }
 
+function GenderSelect({ val, handleChange }){
+  return(
+    <div>
+          <label className="submit-label">Gender (Required):</label>
+            <select
+              className="submit-input"
+              value={ val }
+              onChange={ handleChange }
+            >
+              <option value={null}>Select</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+    </div>
+  )
+}
+
 function SubmitForm() {
   const [appDate, setAppDate] = useState("");
   const [applicantName, setApplicantName] = useState({
@@ -357,18 +374,9 @@ function SubmitForm() {
             ) : null}
           </div>
           {/* End name section */}
-          <div>
-            <label className="submit-label">Gender (Required):</label>
-            <select
-              className="submit-input"
-              value={gender}
-              onChange={(e) => setGender(e.target.value)}
-            >
-              <option value={null}>Select</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-            </select>
-          </div>{" "}
+          <GenderSelect val={ gender } 
+          handleChange={(e) => setGender(e.target.value)}
+          />{" "}
           {/* End gender section */}
           <div>
             <label className="submit-label">Age (Required):</label>
@@ -663,27 +671,15 @@ function SubmitForm() {
                     },
                   })} 
                 />
-                  <label className="submit-label">Sex (Required):</label>
-                  <select
-                    className="submit-input"
-                    value={adults.adultInformation1.adultSex1}
-                    required={true}
-                    onChange={(e) =>
-                      setAdults({
-                        ...adults,
-                        adultInformation1: {
-                          ...adults.adultInformation1,
-                          adultSex1: e.target.value,
-                        },
-                      })
-                    }
-                  >
-                    <option value={null}>Select</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                  </select>
-
-                  <NumInput label="Age (Required):"
+                <GenderSelect val={ adults.adultInformation1.adultSex1 } 
+                  handleChange={(e) => setAdults({...adults, 
+                    adultInformation1: {
+                        ...adults.adultInformation1,
+                        adultSex1: e.target.value,
+                      },
+                    })}
+                />
+                <NumInput label="Age (Required):"
                   val={adults.adultInformation1.adultAge1} req={true}
                   handleChange={(e) =>
                   setAdults({
@@ -730,25 +726,14 @@ function SubmitForm() {
                   })} 
                 />
                 <div>
-                  <label className="submit-label">Sex (Required):</label>
-                  <select
-                    className="submit-input"
-                    value={adults.adultInformation2.adultSex2}
-                    required={true}
-                    onChange={(e) =>
-                      setAdults({
-                        ...adults,
-                        adultInformation2: {
-                          ...adults.adultInformation2,
-                          adultSex2: e.target.value,
-                        },
-                      })
-                    }
-                  >
-                    <option value={null}>Select</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                  </select>
+                <GenderSelect val={ adults.adultInformation2.adultSex2 } 
+                  handleChange={(e) => setAdults({...adults, 
+                    adultInformation2: {
+                        ...adults.adultInformation2,
+                        adultSex2: e.target.value,
+                      },
+                    })}
+                />
 
                   <NumInput label="Age (Required):"
                   val={adults.adultInformation2.adultAge2} req={true}
@@ -797,45 +782,27 @@ function SubmitForm() {
                         },
                       })} 
                     />
-                      <label className="submit-label">Sex (Required):</label>
-                      <select
-                        className="submit-input"
-                        value={adults.adultInformation3.adultSex3}
-                        required={true}
-                        onChange={(e) =>
-                          setAdults({
-                            ...adults,
-                            adultInformation3: {
-                              ...adults.adultInformation3,
-                              adultSex3: e.target.value,
-                            },
-                          })
-                        }
-                      >
-                        <option value={null}>Select</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                      </select>
-
-                      <NumInput label="Age (Required):"
+                    <GenderSelect val={ adults.adultInformation3.adultSex3 } 
+                      handleChange={(e) => setAdults({...adults, 
+                        adultInformation3: {
+                            ...adults.adultInformation3,
+                            adultSex3: e.target.value,
+                          },
+                        })}
+                    />
+                    <NumInput label="Age (Required):"
                       val={adults.adultInformation3.adultAge3} req={true}
                       handleChange={(e) =>
-                      setAdults({
-                        ...adults,
-                        adultInformation3: {
+                      setAdults({...adults, adultInformation3: {
                           ...adults.adultInformation3,
-                          adultAge3: e.target.value,
-                        },
-                      })} 
+                          adultAge3: e.target.value,},})} 
                     />
-                <TextInput label="Relationship (Required):"
-                val={adults.adultInformation3.adultRel3} req={true}
-                handleChange={(e) =>
-                  setAdults({...adults, adultInformation3: {
-                      ...adults.adultInformation3, adultRel3: e.target.value,
-                    },
-                  })} 
-                />
+                    <TextInput label="Relationship (Required):"
+                      val={adults.adultInformation3.adultRel3} req={true}
+                      handleChange={(e) =>
+                        setAdults({...adults, adultInformation3: {
+                            ...adults.adultInformation3, adultRel3: e.target.value,},})} 
+                    />
                 </div>
                 )}
                 {adults.numberOfAdults === "4" && (
@@ -845,47 +812,29 @@ function SubmitForm() {
                   val={adults.adultInformation4.lastName4} req={true}
                   handleChange={(e) =>
                     setAdults({...adults, adultInformation4: {
-                      ...adults.adultInformation4, lastName4: e.target.value,
-                    },
-                  })} 
+                      ...adults.adultInformation4, lastName4: e.target.value,},})} 
                   />
                   <TextInput label="Middle Name (Required):"
                   val={adults.adultInformation4.middleName4} req={true}
                   handleChange={(e) =>
                     setAdults({...adults, adultInformation4: {
-                        ...adults.adultInformation4, middleName4: e.target.value,
-                      },
-                    })} 
+                        ...adults.adultInformation4, middleName4: e.target.value,},})} 
                   />
                   <TextInput label="First Name (Required):"
                   val={adults.adultInformation4.firstName4} req={true}
                   handleChange={(e) =>
                     setAdults({...adults, adultInformation4: {
-                        ...adults.adultInformation4, firstName4: e.target.value,
-                      },
-                    })} 
+                        ...adults.adultInformation4, firstName4: e.target.value,},})} 
                   />
-                    <label className="submit-label">Sex (Required):</label>
-                    <select
-                      className="submit-input"
-                      value={adults.adultInformation4.adultSex4}
-                      required={true}
-                      onChange={(e) =>
-                        setAdults({
-                          ...adults,
-                          adultInformation3: {
-                            ...adults.adultInformation4,
-                            adultSex4: e.target.value,
-                          },
-                        })
-                      }
-                    >
-                      <option value={null}>Select</option>
-                      <option value="Male">Male</option>
-                      <option value="Female">Female</option>
-                    </select>
-
-                    <NumInput label="Age (Required):"
+                  <GenderSelect val={ adults.adultInformation4.adultSex4 } 
+                    handleChange={(e) => setAdults({...adults, 
+                      adultInformation4: {
+                          ...adults.adultInformation4,
+                          adultSex4: e.target.value,
+                        },
+                      })}
+                  />
+                  <NumInput label="Age (Required):"
                     val={adults.adultInformation4.adultAge4} req={true}
                     handleChange={(e) =>
                     setAdults({
@@ -896,14 +845,14 @@ function SubmitForm() {
                       },
                     })} 
                   />
-              <TextInput label="Relationship (Required):"
-              val={adults.adultInformation4.adultRel4} req={true}
-              handleChange={(e) =>
-                setAdults({...adults, adultInformation4: {
-                    ...adults.adultInformation4, adultRel4: e.target.value,
-                  },
-                })} 
-              />
+                  <TextInput label="Relationship (Required):"
+                  val={adults.adultInformation4.adultRel4} req={true}
+                  handleChange={(e) =>
+                    setAdults({...adults, adultInformation4: {
+                        ...adults.adultInformation4, adultRel4: e.target.value,
+                      },
+                    })} 
+                  />
               </div>
                 )}
               </div>
@@ -939,7 +888,7 @@ function SubmitForm() {
           val={ landlord.street } req={ true }
           handleChange={(e) => setLandlord({ ...landlord, street: e.target.value })}
           />
-          <TextInput label="Street Address (Required):" 
+          <TextInput label="City (Required):" 
           val={ landlord.city } req={ true }
           handleChange={(e) => setLandlord({ ...landlord, city: e.target.value })}
           />
@@ -957,7 +906,6 @@ function SubmitForm() {
         {/* Start Income Section */}
         <div className="form-section">
           <SubmitCategory category="Income" />
-          <div>
             <label className="submit-label">Total Income (Required):</label>
             <input
               className="submit-input"
@@ -999,7 +947,6 @@ function SubmitForm() {
             val={ income.numberMembers } req={ true }
             handleChange={(e) => setIncome({ ...income, numberMembers: e.target.value })}
             />
-          </div>
         </div>
         {/* End Income Section */}
 
