@@ -523,18 +523,19 @@ function SubmitForm() {
               </label>
               <select
                 className="submit-input"
-                min={1}
+                min={2}
                 value={adults.numberOfAdults}
                 required={true}
                 onChange={(e) =>
                   setAdults({ ...adults, numberOfAdults: e.target.value })
                 }
               >
-                <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
+                <option value="5">5</option>
               </select>
+              {adults.numberOfAdults >= "2" ? (
               <div>
                 {/* TODO: style h4 */}
                 <h4>Other Adult 1</h4>
@@ -590,6 +591,8 @@ function SubmitForm() {
                   })} 
                 />
               </div>
+              ): null }
+              {adults.numberOfAdults >= "3" ? (
               <div>
                 <h4>Other Adult 2</h4>
                 <TextInput label="Last Name (Required):"
@@ -616,7 +619,6 @@ function SubmitForm() {
                     },
                   })} 
                 />
-                <div>
                 <GenderSelect val={ adults.adultInformation2.adultSex2 } 
                   handleChange={(e) => setAdults({...adults, 
                     adultInformation2: {
@@ -645,9 +647,10 @@ function SubmitForm() {
                   })} 
                 />
               </div>
-                {adults.numberOfAdults > 2 && (
+              ): null }
+                {adults.numberOfAdults >= "4" ? (
                   <div>
-                    <h3>Other Adult 3</h3>
+                    <h4>Other Adult 3</h4>
                     <TextInput label="Last Name (Required):"
                     val={adults.adultInformation3.lastName3} req={true}
                     handleChange={(e) =>
@@ -694,10 +697,10 @@ function SubmitForm() {
                             ...adults.adultInformation3, adultRel3: e.target.value,},})} 
                     />
                 </div>
-                )}
-                {adults.numberOfAdults === "4" && (
+                ) : null}
+                {adults.numberOfAdults === "5" ? (
                   <div>
-                  <h3>Other Adult 4</h3>
+                  <h4>Other Adult 4</h4>
                   <TextInput label="Last Name (Required):"
                   val={adults.adultInformation4.lastName4} req={true}
                   handleChange={(e) =>
@@ -744,9 +747,8 @@ function SubmitForm() {
                     })} 
                   />
               </div>
-                )}
+                ) : null}
               </div>
-            </div>
           ) : null}
         </div>
         {/* End Adults Section */}
