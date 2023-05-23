@@ -70,7 +70,7 @@ const validateApplicant = (req, res, next) => {
     gender: Joi.string().required(),
     age: Joi.number().required().min(18).max(100),
     address: Joi.when("homeless", {
-      is: "no",
+      is: "No",
       then: addressSchema.required(),
       otherwise: Joi.optional().allow(""),
     }),
@@ -86,7 +86,7 @@ const validateApplicant = (req, res, next) => {
       rent: Joi.string().required(),
       gasoline: Joi.string().required(),
       licensePlate: Joi.when("gasoline", {
-        is: "yes",
+        is: "Yes",
         then: Joi.required(),
         otherwise: Joi.optional(),
       }),
@@ -105,34 +105,34 @@ const validateApplicant = (req, res, next) => {
       isChildren: Joi.string().required(),
     }),
     children: Joi.when("isChildren", {
-      is: "yes",
+      is: "Yes",
       then: childrenSchema.required(),
       otherwise: Joi.optional(),
     }),
     adults: Joi.object({
       isAdults: Joi.string().required(),
-      numberOfAdults: Joi.when("isAdult", {
-        is: "yes",
+      numberOfAdults: Joi.when("isAdults", {
+        is: "Yes",
         then: Joi.number().required(),
         otherwise: Joi.optional(),
       }),
-      adultInformation1: Joi.when("isAdult", {
-        is: "yes",
+      adultInformation1: Joi.when("numberOfAdults", {
+        is: Joi.number().valid(2, 3, 4, 5),
         then: adultInformationSchema1.required(),
         otherwise: Joi.optional(),
       }),
-      adultInformation2: Joi.when("isAdult", {
-        is: "yes",
+      adultInformation2: Joi.when("numberOfAdults", {
+        is: Joi.number().valid(3, 4, 5),
         then: adultInformationSchema2.required(),
         otherwise: Joi.optional(),
       }),
-      adultInformation3: Joi.when("isAdult", {
-        is: "yes",
+      adultInformation3: Joi.when("numberOfAdults", {
+        is: Joi.number().valid(4, 5),
         then: adultInformationSchema3.required(),
         otherwise: Joi.optional(),
       }),
-      adultInformation4: Joi.when("isAdult", {
-        is: "yes",
+      adultInformation4: Joi.when("numberOfAdults", {
+        is: 5,
         then: adultInformationSchema4.required(),
         otherwise: Joi.optional(),
       }),
