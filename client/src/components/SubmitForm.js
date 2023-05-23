@@ -1,8 +1,8 @@
 // this is a submit form
 // fetch an endpoint and insert data into the database
 import React, { useState } from "react";
-//import  validationSchema  from './validation';
-
+import  { validationSchema } from './validation';
+//import { validationSchema } from './components/validation';
 
 function SubmitCategory({ category }) {
   return (
@@ -13,7 +13,6 @@ function SubmitCategory({ category }) {
   </label>
   );
 }
-
 
 function SubmitForm() {
   const [appDate, setAppDate] = useState("");
@@ -118,129 +117,68 @@ function SubmitForm() {
     numUnknown: 0,
   });
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    alert(
-      `Submitting Name ${applicantName.firstName} ${applicantName.middleName} ${applicantName.lastName}`
-    );
 
-    fetch("http://localhost:3001/createApplicants", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        appDate: appDate,
-        applicantName: {
-          firstName: applicantName.firstName,
-          middleName: applicantName.middleName,
-          lastName: applicantName.lastName,
-        },
-        gender: gender,
-        age: age,
-        address: {
-          street: address.street,
-          city: address.city,
-          zip: address.zip,
-        },
-        phone: phone,
-        otherLastName: {
-          otherLastName2: otherLastName.otherLastName2,
-          otherLastName3: otherLastName.otherLastName3,
-          otherLastName4: otherLastName.otherLastName4,
-        },
-        homeless: homeless,
-        disabled: disabled,
-        helpRequest: {
-          rent: helpRequest.rent,
-          gasoline: helpRequest.gasoline,
-          licensePlate: helpRequest.licensePlate,
-          busTicket: helpRequest.busTicket,
-          food: helpRequest.food,
-        },
-        IdSource: {
-          license: IdSource.license,
-          expDate: IdSource.expDate,
-          ssn: IdSource.ssn,
-        },
-        singleMale: singleMale,
-        singleFemale: singleFemale,
-        children: {
-          isChildren: children.isChildren,
-          boyNumber: children.boyNumber,
-          boyAge: children.boyAge,
-          girlNumber: children.girlNumber,
-          girlAge: children.girlAge,
-          childrenRel: children.childrenRel,
-          schoolDistrict: children.schoolDistrict,
-          schoolName: children.schoolName,
-        },
-        adults: {
-          isAdults: adults.isAdults,
-          numberOfAdults: adults.numberOfAdults,
-          adultInformation1: {
-            lastName1: adults.adultInformation1.lastName1,
-            middleName1: adults.adultInformation1.middleName1,
-            firstName1: adults.adultInformation1.firstName1,
-            adultSex1: adults.adultInformation1.adultSex1,
-            adultAge1: adults.adultInformation1.adultAge1,
-            adultRel1: adults.adultInformation1.adultRel1,
-          },
-          adultInformation2: {
-            lastName2: adults.adultInformation2.lastName2,
-            middleName2: adults.adultInformation2.middleName2,
-            firstName2: adults.adultInformation2.firstName2,
-            adultSex2: adults.adultInformation2.adultSex2,
-            adultAge2: adults.adultInformation2.adultAge2,
-            adultRel2: adults.adultInformation2.adultRel2,
-          },
-          adultInformation3: {
-            lastName3: adults.adultInformation3.lastName3,
-            middleName3: adults.adultInformation3.middleName3,
-            firstName3: adults.adultInformation3.firstName3,
-            adultSex3: adults.adultInformation3.adultSex3,
-            adultAge3: adults.adultInformation3.adultAge3,
-            adultRel3: adults.adultInformation3.adultRel3,
-          },
-          adultInformation4: {
-            lastName4: adults.adultInformation4.lastName4,
-            middleName4: adults.adultInformation4.middleName4,
-            firstName4: adults.adultInformation4.firstName4,
-            adultSex4: adults.adultInformation4.adultSex4,
-            adultAge4: adults.adultInformation4.adultAge4,
-            adultRel4: adults.adultInformation4.adultRel4,
-          },
-        },
-        landlord: {
-          landlordName: landlord.landlordName,
-          interviewerCheck: landlord.interviewerCheck,
-          street: landlord.street,
-          city: landlord.city,
-          zip: landlord.zip,
-          phone: landlord.phone,
-        },
-        income: {
-          totalIncome: income.totalIncome,
-          monthlyIncome: income.monthlyIncome,
-          numberMembers: income.numberMembers,
-        },
-        demographics: {
-          numAmericanIndian: demographics.numAmericanIndian,
-          numAsian: demographics.numAsian,
-          numBlack: demographics.numBlack,
-          numLatinx: demographics.numLatinx,
-          numNative: demographics.numNative,
-          numWhite: demographics.numWhite,
-          numOther: demographics.numOther,
-          numMulti: demographics.numMulti,
-          numUnknown: demographics.numUnknown,
-        },
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
+    try {
+      await validationSchema.validate({
+        appDate,
+        applicantName,
+        gender,
+        age,
+        address,
+        phone,
+        otherLastName,
+        homeless,
+        disabled,
+        helpRequest,
+        IdSource,
+        singleMale,
+        singleFemale,
+        children,
+        adults,
+        landlord,
+        income,
+        demographics,
       });
+
+      alert(
+        `Submitting Name ${applicantName.firstName} ${applicantName.middleName} ${applicantName.lastName}`
+      );
+
+      fetch("http://localhost:3001/createApplicants", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          appDate,
+          applicantName,
+          gender,
+          age,
+          address,
+          phone,
+          otherLastName,
+          homeless,
+          disabled,
+          helpRequest,
+          IdSource,
+          singleMale,
+          singleFemale,
+          children,
+          adults,
+          landlord,
+          income,
+          demographics,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

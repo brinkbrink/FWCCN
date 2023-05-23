@@ -1,6 +1,5 @@
 import * as Yup from 'yup';
 
-
 export const validationSchema = Yup.object().shape({
     appDate: Yup.string().required('Application date is required'),
     applicantName: Yup.object().shape({
@@ -108,3 +107,6 @@ export const validationSchema = Yup.object().shape({
         numUnknown: Yup.number().min(0, 'Number cannot be negative'),
       }),
     });
+
+   // module.exports = { validationSchema };
+   export default validationSchema;
