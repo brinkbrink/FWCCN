@@ -19,7 +19,7 @@ const uri = `mongodb+srv://${db_username}:${db_password}@${db_url}?retryWrites=t
 mongoose.connect(uri);
 
 // This is the endpoint that will be used to create a new applicant
-app.post("/createApplicants", async (req,res) => {
+app.post("/createApplicants", validateApplicant, async (req,res) => {
     try {
         const applicant = new ApplicantModel(req.body);
         const result = await applicant.save();

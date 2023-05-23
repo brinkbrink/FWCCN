@@ -44,14 +44,14 @@ function TextInput ({ label, val, handleChange, req }) {
   );
 }
 
-function NumInput ({ label, val, handleChange, req }) {
+function NumInput ({ label, val, handleChange, req, min=0}) {
   return (
     <div>
       <label className="submit-label">{ label }</label>
       <input
         className="submit-input"
         type="number"
-        min={0}
+        min={min}
         value={ val }
         required={ req }
         onChange={ handleChange }
@@ -332,48 +332,38 @@ function SubmitForm() {
           val={applicantName.firstName} req={ true }
           handleChange={(e) => setApplicantName({ ...applicantName, firstName: e.target.value })} 
           />
-          <div>
-            <YesNoSelect label="Do you have other last names used? (Required)"
-            val={ otherLastName.isOtherLastName } 
-            handleChange={(e) => setOtherLastName({
-                ...otherLastName, isOtherLastName: e.target.value,})}
-            />
-            {otherLastName.isOtherLastName === "Yes" ? (
-              <div>
-                <TextInput 
-                label="Last Name 1 (Optional):" 
-                val={ otherLastName.otherLastName2 } req={ false }
-                handleChange={(e) => setOtherLastName({ ...otherLastName, otherLastName2: e.target.value })} 
-                />
-                <TextInput 
-                label="Last Name 2 (Optional):" 
-                val={ otherLastName.otherLastName3 } req={ false }
-                handleChange={(e) => setOtherLastName({ ...otherLastName, otherLastName3: e.target.value })} 
-                />
-                <TextInput 
-                label="Last Name 3 (Optional):" 
-                val={ otherLastName.otherLastName4 } req={ false }
-                handleChange={(e) => setOtherLastName({ ...otherLastName, otherLastName4: e.target.value })} 
-                />
-              </div>
-            ) : null}
-          </div>
+          <YesNoSelect label="Do you have other last names used? (Required)"
+          val={ otherLastName.isOtherLastName } 
+          handleChange={(e) => setOtherLastName({
+              ...otherLastName, isOtherLastName: e.target.value,})}
+          />
+          {otherLastName.isOtherLastName === "Yes" ? (
+            <div>
+              <TextInput 
+              label="Last Name 1 (Optional):" 
+              val={ otherLastName.otherLastName2 } req={ false }
+              handleChange={(e) => setOtherLastName({ ...otherLastName, otherLastName2: e.target.value })} 
+              />
+              <TextInput 
+              label="Last Name 2 (Optional):" 
+              val={ otherLastName.otherLastName3 } req={ false }
+              handleChange={(e) => setOtherLastName({ ...otherLastName, otherLastName3: e.target.value })} 
+              />
+              <TextInput 
+              label="Last Name 3 (Optional):" 
+              val={ otherLastName.otherLastName4 } req={ false }
+              handleChange={(e) => setOtherLastName({ ...otherLastName, otherLastName4: e.target.value })} 
+              />
+            </div>
+          ) : null}
           {/* End name section */}
           <GenderSelect val={ gender } 
           handleChange={(e) => setGender(e.target.value)}
           />{" "}
           {/* End gender section */}
-          <div>
-            <label className="submit-label">Age (Required):</label>
-            <input
-              className="submit-input"
-              type="number"
-              value={age}
-              onChange={(e) => setAge(e.target.value)}
-              required={true}
-              min={18}
-            />
-          </div>{" "}
+          <NumInput label="Age (Required):" val={ age } req={ true }
+          handleChange={(e) => setAge(e.target.value)} min={18}
+          />{" "}
           {/* End age section */}
           <YesNoSelect label="Disabled (Required):" val={ disabled } handleChange={(e) => setDisabled(e.target.value)} />
           <YesNoSelect label="Single Male (Required):" val={ singleMale } handleChange={(e) => setSingleMale(e.target.value)} />
@@ -499,7 +489,6 @@ function SubmitForm() {
                   handleChange={(e) => setChildren({ ...children, girlAge: e.target.value })} 
                   />
               </div>
-
               <TextInput 
               label="What is your relationship to the children? (Required):" 
               val={ children.childrenRel } req={ true }
@@ -529,25 +518,23 @@ function SubmitForm() {
           />
           {adults.isAdults === "Yes" ? (
             <div>
-              <div>
-                <label className="submit-label">
-                  Number of Adults (including you) (Required):
-                </label>
-                <select
-                  className="submit-input"
-                  min={1}
-                  value={adults.numberOfAdults}
-                  required={true}
-                  onChange={(e) =>
-                    setAdults({ ...adults, numberOfAdults: e.target.value })
-                  }
-                >
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                </select>
-              </div>
+              <label className="submit-label">
+                Number of Adults (including you) (Required):
+              </label>
+              <select
+                className="submit-input"
+                min={1}
+                value={adults.numberOfAdults}
+                required={true}
+                onChange={(e) =>
+                  setAdults({ ...adults, numberOfAdults: e.target.value })
+                }
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
               <div>
                 {/* TODO: style h4 */}
                 <h4>Other Adult 1</h4>
