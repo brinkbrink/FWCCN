@@ -7,6 +7,7 @@ const ApplicantModel = require('./models/Applicants');
 const cors = require('cors');
 app.use(express.json());
 app.use(cors());
+const { validateApplicant } = require('./routes/validation');
 
 
 dotenv.config()
