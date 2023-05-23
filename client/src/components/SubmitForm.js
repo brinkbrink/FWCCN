@@ -535,7 +535,6 @@ function SubmitForm() {
                 <option value="4">4</option>
                 <option value="5">5</option>
               </select>
-              {adults.numberOfAdults >= "2" ? (
               <div>
                 {/* TODO: style h4 */}
                 <h4>Other Adult 1</h4>
@@ -591,7 +590,6 @@ function SubmitForm() {
                   })} 
                 />
               </div>
-              ): null }
               {adults.numberOfAdults >= "3" ? (
               <div>
                 <h4>Other Adult 2</h4>
