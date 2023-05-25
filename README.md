@@ -5,8 +5,8 @@ This is a project to create a virtual intake form for the Federal Way Community 
 
 # Features:
 
-* Efficient form for applicants and interviewers to utilize
-* Form with client and server-side validation
+* Efficient form for FWCCN interviewers to utilize
+* Client and server-side validation
 * Ability to evaluate applicant's qualification status
 * Easy maintenance and flexibility if changes are needed in the future
 * Data schema that lends itself to a quarterly report
