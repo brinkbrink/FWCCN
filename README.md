@@ -15,7 +15,6 @@ This is a project to create a virtual intake form for the Federal Way Community 
 
 * MERN Stack (MongoDB, Express, React, Node)
 
-* Go to the github repo and make a pull request
 # Project Team:
 
 * [Brink](https://www.linkedin.com/in/eebrink/)
