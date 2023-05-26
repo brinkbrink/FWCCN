@@ -140,6 +140,92 @@ const ApplicantSchema = new mongoose.Schema({
       numMulti: Number,
       numUnknown: Number,
     },
+    // interviewer section
+    referredBy: String,
+    giveNoticeOnceInTwoYears: Boolean,
+    lastNoticeGiven: Date,
+    explanation: String,
+    estimatedAnnualIncome: Number,
+    veryLowIncome: Boolean,
+    lowIncome: Boolean,
+    incomeSources: {
+      job: Number,
+      unemployment: Number,
+      dshs: Number,
+      ss: Number,
+      pension: Number,
+      childSupport: Number,
+      childTaxCreditPayments: Number,
+      foodCupons: Number,
+      stateMed: Number,
+      other: Number,
+    },
+    rent: {
+      totalMonthlyRent: Number,
+      section8: Boolean,
+      section8Payments: Number,
+      otherRentAssistanceProgram: Boolean,
+      otherRentAssistanceAmountPaid: Number,
+    },
+    helpReceivedForRent: {
+      received: Boolean,
+      agencies: [
+        {
+          agencyName: String,
+          amount: Number,
+        },
+      ],
+    },
+    homeless: {
+      howLong: Number,
+      why: String,
+      recentStays: String,
+    },
+    gasolineVoucher: {
+      driversLicenseNumber: String,
+      reasonForNeed: String,
+    },
+    busTickets: {
+      reasonForNeed: String,
+    },
+    //end interviewer section
+    //start action taken
+    actionTaken: {
+      amountPromised: Number,
+      amountGivenToday: Number,
+      CheckNum: Number,
+      bringLease: Number,
+      leaseChecked: Number,
+      owedReceipt: Number,
+      incomeVerification: Number,
+      nameAndAddressForCheck: {
+        name: String,
+        address: String,
+        city: String,
+        state: String,
+        zip: Number
+      },
+      motelArr: {
+        where: String,
+        time: String,
+        price: Number,
+      },
+      gasVoucherAmount: Number,
+      licensePlate: String,
+      busTickets1: Number,
+      other: String,
+      foodBagGiven: Number,
+      explanationMeals: String,
+      intakeWorker: Number,
+      dateClientReturn: Date,
+      allRentGathered: Number,
+      amountGiven: Number,
+      checkNum: Number,
+      to: String,
+      secondIntakeWorker: String
+
+    },
+  
    // end schema
   });
 const ApplicantModel = mongoose.model("applicants", ApplicantSchema);
