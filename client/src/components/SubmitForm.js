@@ -1,6 +1,7 @@
 // this is a submit form
 // fetch an endpoint and insert data into the database
 import React, { useState } from "react";
+import CurrencyFormat from 'react-currency-format';
 
 function SubmitCategory({ category }) {
   return (
@@ -785,41 +786,23 @@ function SubmitForm() {
         <div className="form-section">
           <SubmitCategory category="Income" />
             <label className="submit-label">Total Income (Required):</label>
-            <input
+            <CurrencyFormat
               className="submit-input"
-              type="text"
-              value={income.totalIncome.toLocaleString("en-US", {
-                style: "currency",
-                currency: "USD",
-                minimumFractionDigits: 2,
-              })}
+              value={income.totalIncome}
+              thousandSeparator={true}
+              prefix="$"
               required={true}
-              onChange={(e) => {
-                setIncome({
-                  ...income,
-                  totalIncome: Number(e.target.value.replace(/[^0-9.-]+/g, "")),
-                });
-              }}
+              onValueChange={(e) => setIncome ({ ...income, totalIncome: e.floatValue})}
             />
-
+            <p>{income.totalIncome}</p>
             <label className="submit-label">Monthly Income (Required): </label>
-            <input
+            <CurrencyFormat
               className="submit-input"
-              type="text"
-              value={income.monthlyIncome.toLocaleString("en-US", {
-                style: "currency",
-                currency: "USD",
-                minimumFractionDigits: 2,
-              })}
+              value={income.monthlyIncome}
+              thousandSeparator={true}
+              prefix="$"
               required={true}
-              onChange={(e) =>
-                setIncome({
-                  ...income,
-                  monthlyIncome: Number(
-                    e.target.value.replace(/[^0-9.-]+/g, "")
-                  ),
-                })
-              }
+              onValueChange={(e) => setIncome({ ...income, monthlyIncome: e.floatValue })}
             />
             <NumInput label="Number of members supported by this income (Required):"
             val={ income.numberMembers } req={ true }
