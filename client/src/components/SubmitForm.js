@@ -794,7 +794,6 @@ function SubmitForm() {
               required={true}
               onValueChange={(e) => setIncome ({ ...income, totalIncome: e.floatValue})}
             />
-            <p>{income.totalIncome}</p>
             <label className="submit-label">Monthly Income (Required): </label>
             <CurrencyFormat
               className="submit-input"
