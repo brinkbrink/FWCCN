@@ -1,5 +1,4 @@
-// This file is used to validate the data that is being sent to the server
-const Joi = require("@hapi/joi");
+const Joi = require('@hapi/joi');
 
 const addressSchema = Joi.object({
   street: Joi.string().required(),
@@ -59,34 +58,34 @@ const validateApplicant = (req, res, next) => {
     applicantName: Joi.object({
       firstName: Joi.string()
         .required()
-        .pattern(new RegExp("^[a-zA-Z]+$"))
-        .messages({ "string.pattern.base": "First name must be letters only" }),
-      middleName: Joi.string().optional().allow(""),
+        .pattern(new RegExp('^[a-zA-Z]+$'))
+        .messages({ 'string.pattern.base': 'First name must be letters only' }),
+      middleName: Joi.string().optional().allow(''),
       lastName: Joi.string()
         .required()
-        .pattern(new RegExp("^[a-zA-Z]+$"))
-        .messages({ "string.pattern.base": "Last name must be letters only" }),
+        .pattern(new RegExp('^[a-zA-Z]+$'))
+        .messages({ 'string.pattern.base': 'Last name must be letters only' }),
     }),
     gender: Joi.string().required(),
     age: Joi.number().required().min(18).max(100),
-    address: Joi.when("homeless", {
-      is: "No",
+    address: Joi.when('homeless', {
+      is: 'No',
       then: addressSchema.required(),
-      otherwise: Joi.optional().allow(""),
+      otherwise: Joi.optional().allow(''),
     }),
     phone: Joi.string().required().min(10).max(10),
     otherLastName: Joi.object({
-      otherLastName2: Joi.string().optional().allow(""),
-      otherLastName3: Joi.string().optional().allow(""),
-      otherLastName4: Joi.string().optional().allow(""),
+      otherLastName2: Joi.string().optional().allow(''),
+      otherLastName3: Joi.string().optional().allow(''),
+      otherLastName4: Joi.string().optional().allow(''),
     }),
     homeless: Joi.string().required(),
     disabled: Joi.string().required(),
     helpRequest: Joi.object({
       rent: Joi.string().required(),
       gasoline: Joi.string().required(),
-      licensePlate: Joi.when("gasoline", {
-        is: "Yes",
+      licensePlate: Joi.when('gasoline', {
+        is: 'Yes',
         then: Joi.required(),
         otherwise: Joi.optional(),
       }),
@@ -104,34 +103,34 @@ const validateApplicant = (req, res, next) => {
     children: Joi.object({
       isChildren: Joi.string().required(),
     }),
-    children: Joi.when("isChildren", {
-      is: "Yes",
+    children: Joi.when('isChildren', {
+      is: 'Yes',
       then: childrenSchema.required(),
       otherwise: Joi.optional(),
     }),
     adults: Joi.object({
       isAdults: Joi.string().required(),
-      numberOfAdults: Joi.when("isAdults", {
-        is: "Yes",
+      numberOfAdults: Joi.when('isAdults', {
+        is: 'Yes',
         then: Joi.number().required(),
         otherwise: Joi.optional(),
       }),
-      adultInformation1: Joi.when("numberOfAdults", {
+      adultInformation1: Joi.when('numberOfAdults', {
         is: Joi.number().valid(2, 3, 4, 5),
         then: adultInformationSchema1.required(),
         otherwise: Joi.optional(),
       }),
-      adultInformation2: Joi.when("numberOfAdults", {
+      adultInformation2: Joi.when('numberOfAdults', {
         is: Joi.number().valid(3, 4, 5),
         then: adultInformationSchema2.required(),
         otherwise: Joi.optional(),
       }),
-      adultInformation3: Joi.when("numberOfAdults", {
+      adultInformation3: Joi.when('numberOfAdults', {
         is: Joi.number().valid(4, 5),
         then: adultInformationSchema3.required(),
         otherwise: Joi.optional(),
       }),
-      adultInformation4: Joi.when("numberOfAdults", {
+      adultInformation4: Joi.when('numberOfAdults', {
         is: 5,
         then: adultInformationSchema4.required(),
         otherwise: Joi.optional(),
@@ -144,7 +143,8 @@ const validateApplicant = (req, res, next) => {
       street: Joi.string().required(),
       city: Joi.string()
         .required()
-        .messages({ "string.pattern.base": "City must be letters only" }),
+        .pattern(new RegExp('^[a-zA-Z]+$'))
+        .messages({ 'string.pattern.base': 'City must be letters only' }),
       zip: Joi.string().required().min(5).max(5),
       phone: Joi.string().required().min(10).max(10),
     }),
@@ -166,11 +166,17 @@ const validateApplicant = (req, res, next) => {
       numUnknown: Joi.number().required(),
     }),
   });
-  const { error } = schema.validate(req.body);
+
+  const { error } = schema.validate(req.body, { abortEarly: false });
   if (error) {
-    return res.status(400).send(error.details[0].message);
+    const errorMessage = error.details.map(detail => detail.message).join('\n');
+    return res.status(400).send(errorMessage);
   }
+
   next();
 };
 
-module.exports = { validateApplicant };
+module.exports = {
+  validateApplicant
+};
+
