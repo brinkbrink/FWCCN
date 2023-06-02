@@ -185,7 +185,7 @@ function SubmitForm() {
     alert(
       `Submitting Name ${applicantName.firstName} ${applicantName.middleName} ${applicantName.lastName}`
     );
-    fetch("http://localhost:3001/createApplicants", {
+    fetch("http://localhost:3001/applicants/add", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
