@@ -1,6 +1,7 @@
 // this is a submit form
 // fetch an endpoint and insert data into the database
 import React, { useState } from "react";
+import CurrencyFormat from 'react-currency-format';
 
 function SubmitCategory({ category }) {
   return (
@@ -10,6 +11,71 @@ function SubmitCategory({ category }) {
     </h3>
   </label>
   );
+}
+
+function YesNoSelect({ label, val, handleChange }) {
+  return (
+  <div>
+      <label className="submit-label">{ label }</label>
+          <select
+            className="submit-input"
+            value={ val }
+            onChange={ handleChange }
+          >
+            <option value={null}>Select</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+  </div>
+  );
+}
+
+function TextInput ({ label, val, handleChange, req }) {
+  return (
+  <div>
+    <label className="submit-label">{ label }</label>
+    <input
+      className="submit-input"
+      type="text"
+      value={ val }
+      onChange={ handleChange }
+      required={ req }
+    />
+  </div>
+  );
+}
+
+function NumInput ({ label, val, handleChange, req, min=0}) {
+  return (
+    <div>
+      <label className="submit-label">{ label }</label>
+      <input
+        className="submit-input"
+        type="number"
+        min={min}
+        value={ val }
+        required={ req }
+        onChange={ handleChange }
+      />
+    </div>
+  )
+}
+
+function GenderSelect({ val, handleChange }){
+  return(
+    <div>
+          <label className="submit-label">Gender (Required):</label>
+            <select
+              className="submit-input"
+              value={ val }
+              onChange={ handleChange }
+            >
+              <option value={null}>Select</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+    </div>
+  )
 }
 
 function SubmitForm() {
