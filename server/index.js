@@ -24,7 +24,7 @@ mongoose.connect(uri);
 
 const connection = mongoose.connection;
 connection.once('open',() => {
-    console.log("MongoDB database connection established succesfully");
+    console.log("MongoDB database connection established successfully");
 })
 
 const applicantRouter = require('./routes/applicants')
