@@ -20,6 +20,8 @@ const db_password = process.env.MONGO_DB_PASSWORD;
 const db_url = process.env.MONGO_DB_URL;
 const uri = `mongodb+srv://${db_username}:${db_password}@${db_url}?retryWrites=true&w=majority`;
 
+//console.log(uri)
+
 mongoose.connect(uri);
 
 const connection = mongoose.connection;

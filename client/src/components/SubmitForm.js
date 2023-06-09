@@ -305,6 +305,23 @@ function SubmitForm() {
       });
   };
 
+  
+  const handleSingleMaleChange = (e) => {
+    const value = e.target.value;
+    setSingleMale(value);
+    if (value === 'Yes') {
+      setSingleFemale('');
+    }
+  };
+  
+  const handleSingleFemaleChange = (e) => {
+    const value = e.target.value;
+    setSingleFemale(value);
+    if (value === 'Yes') {
+      setSingleMale('');
+    }
+  };
+
   return (
     <div className="form">
       <form className="submit-form" onSubmit={handleSubmit}>
@@ -367,8 +384,26 @@ function SubmitForm() {
           />{" "}
           {/* End age section */}
           <YesNoSelect label="Disabled (Required):" val={ disabled } handleChange={(e) => setDisabled(e.target.value)} />
-          <YesNoSelect label="Single Male (Required):" val={ singleMale } handleChange={(e) => setSingleMale(e.target.value)} />
-          <YesNoSelect label="Single Female (Required):" val={ singleFemale } handleChange={(e) => setSingleFemale(e.target.value)} />
+          {/* <YesNoSelect label="Single Male (Required):" val={ singleMale } handleChange={(e) => setSingleMale(e.target.value)} />
+          <YesNoSelect label="Single Female (Required):" val={ singleFemale } handleChange={(e) => setSingleFemale(e.target.value)} /> */}
+
+          <>
+          
+      {singleFemale === 'Yes' ? null : (
+        <YesNoSelect
+          label="Single Male (Required):"
+          val={singleMale}
+          handleChange={handleSingleMaleChange}
+        />
+      )}
+    {singleMale === 'Yes' ? null : (
+      <YesNoSelect
+        label="Single Female (Required):"
+        val={singleFemale}
+        handleChange={handleSingleFemaleChange}
+      />
+    )}
+  </>
         </div>
         <div className="form-section">
           <SubmitCategory category={"Contact"} />
