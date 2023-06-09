@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const ApplicantModel = require('../models/Applicants');
 const { validateApplicant } = require('../routes/validation');
-const { checkEligibility } = require('../routes/eligibility');
 
 
 //get all records route
@@ -12,13 +11,37 @@ router.route('/').get((req, res) => {
 });
 
 //create user route
-router.route('/add').post(validateApplicant, checkEligibility, (req, res) => {
-  const newApplicant = new ApplicantModel(req.body);
+router.route('/add').post(validateApplicant, async (req, res) => {
+  const applicantLicense = req.body.IdSource.license;  
+  const existApplicant = await ApplicantModel.findOne({ 'IdSource.license': applicantLicense });
 
-  newApplicant
-    .save()
-    .then(() => res.json('Applicant added!'))
-    .catch((err) => res.status(400).json('Error: ' + err));
+  if (!existApplicant) {
+    const newApplicant = new ApplicantModel(req.body);
+
+    newApplicant
+      .save()
+      .then(() => res.json('This is a new applicant. Applicant added!'))
+      .catch(err => res.status(400).json('Error: ' + err));
+  } else {
+    // check if application date is within 24 months or 2 years
+    const prevApplicationDate = new Date(existApplicant.appDate);
+    const currApplicationDate = new Date(req.body.appDate);
+
+    const timeDiff = Math.abs(currApplicationDate.getTime() - prevApplicationDate.getTime());
+    const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+    if (diffDays < 730) {
+      return res.status(400).json('An existing applicant and is not eligible to renew within 2 years.');
+    } else {
+      // update the applicant date and save
+      existApplicant.set(req.body);
+
+      existApplicant
+        .save()
+        .then(() => res.json('An existing applicant and is eligible to renew within 2 years. Applicant updated!'))
+        .catch(err => res.status(400).json('Error: ' + err));
+    }
+  }
 });
 
 //searching function by ObjectID
