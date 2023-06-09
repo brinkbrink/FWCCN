@@ -78,8 +78,23 @@ function GenderSelect({ val, handleChange }){
   )
 }
 
+function DateInput({ label, val, handleChange }){
+  return(
+    <div>
+      <label className="submit-label">{ label }</label>
+      <input
+        className="submit-input"
+        type="date"
+        value={ val }
+        onChange={ handleChange }
+      />
+    </div>
+  )
+}
+
 function SubmitForm() {
-  const [appDate, setAppDate] = useState("");
+  const currentDate = new Date().toISOString().substring(0, 10);
+  const [appDate, setAppDate] = useState(currentDate);
   const [applicantName, setApplicantName] = useState({
     firstName: "",
     middleName: "",
@@ -105,7 +120,7 @@ function SubmitForm() {
   });
   const [IdSource, setIdSource] = useState({
     license: "",
-    expDate: "",
+    expDate: currentDate,
     ssn: "",
   });
   const [singleMale, setSingleMale] = useState("");
@@ -311,13 +326,7 @@ function SubmitForm() {
         {/* Primary Applicant Section */}
         <div className="form-section">
           <SubmitCategory category="Primary Applicant" />
-            <label className="submit-label">Application Date (Required):</label>
-            <input
-              className="submit-input"
-              type="date"
-              value={appDate}
-              onChange={(e) => setAppDate(e.target.value)}
-            />
+          <DateInput label="Application Date (Required):" val={ appDate } handleChange={(e) => setAppDate(e.target.value)} />
           <TextInput 
           label="Last Name (Required):" 
           val={applicantName.lastName} req={ true }
@@ -431,15 +440,7 @@ function SubmitForm() {
           val={ IdSource.license } req={ true }
           handleChange={(e) => setIdSource({ ...IdSource, license: e.target.value })}
           />
-          <label className="submit-label">Expiration Date (Required):</label>
-          <input
-            className="submit-input"
-            type="date"
-            value={IdSource.expDate}
-            onChange={(e) =>
-              setIdSource({ ...IdSource, expDate: e.target.value })
-            }
-          />
+          <DateInput label="Expiration Date (Required):" val={ IdSource.expDate } handleChange={(e) => setIdSource({ ...IdSource, expDate: e.target.value })} />
           <label className="submit-label">
             Social Security: (Last 4 digits) (Required)
           </label>
